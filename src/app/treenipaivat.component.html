@@ -1,0 +1,29 @@
+<h2>Treenipäivät</h2>
+<button (click)="getTreenipaivat()">Refresh</button>
+<div *ngIf="treenipaivat" >
+<table class="table table-hover table table-striped">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Pvm</td>
+            <td>paino</td>
+            <td>Kuntoindeksi</td>
+            <td>Huomiot</td>
+            <td>Treenit</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let treenipaiva of treenipaivat"  >
+            <td (click)="gotoDetail(treenipaiva.id)">{{treenipaiva.id}}</td>
+            <td>{{treenipaiva.pvm}}</td>
+            <td>{{treenipaiva.paino}}</td>
+            <td>{{treenipaiva.kuntoindeksi}}</td>
+            <td>{{treenipaiva.huomiot}}</td>
+            <td>
+                <treenilista [treenit]="treenipaiva.treenit"></treenilista>
+            </td>
+        </tr>
+    </tbody>
+</table> 
+</div>    
+    

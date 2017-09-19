@@ -1,0 +1,15 @@
+<div >
+    <div>
+        <label>Email: </label>
+        <input [(ngModel)]="email" placeholder="email" />
+    </div>
+    <div>
+        <label>Password: </label>
+        <input [(ngModel)]="password" placeholder="password" />
+    </div>
+  <button (click)="login()" class="btn btn-info">Login</button>
+
+</div>
+<div> Login status: 
+    <div>{{loginStatus}}</div>
+</div>
