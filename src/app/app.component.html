@@ -1,11 +1,11 @@
 <hr>
-  <nav>
-    <a class="btn btn-info" routerLink="/kayttaja" routerLinkActive="active">Käyttäjän tiedot</a>
-    <a class="btn btn-info" routerLink="/treenipaivat" routerLinkActive="active">Treenipaivat</a>
-    <a class="btn btn-info" routerLink="/rekisteroityminen" routerLinkActive="active">Rekisteröityminen</a>
-    <div>
-      <login-menu> </login-menu>
-    </div>
+  <nav class="navbar navbar-inverse">
+    <a class="navbar-brand" routerLink="/treenipaivat" routerLinkActive="active">Treenipaivalista</a>
+    <a class="navbar-brand" routerLink="/treenipaivat" routerLinkActive="active">Viikkonäkymä</a>
+    <a class="navbar-brand" routerLink="/treenipaivat" routerLinkActive="active">Kuukausinäkymä</a>
+    <a class="navbar-brand" routerLink="/rekisteroityminen" routerLinkActive="active">Rekisteröityminen</a>
+    <login-menu> </login-menu>
+    <a class="navbar-brand" routerLink="/kayttaja" title="Käyttäjän tiedot" routerLinkActive="active"><i class="glyphicon glyphicon-user"></i></a>
   </nav>
   <hr>
   <router-outlet></router-outlet>    

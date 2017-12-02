@@ -7,14 +7,14 @@ import { HttpModule }    from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 
 // Imports for loading & configuring the in-memory web api
-import { AppComponent }         from './app.component';
+import { AppComponent }             from './app.component';
 import { UserDetailComponent }      from './user-detail.component';
-import { LoginMenuComponent }      from './login-menu.component';
-import { TreenipaivatComponent }      from './treenipaivat.component';
-import { TreenipaivaComponent }      from './treenipaiva.component';
-import { TreenilistaComponent }      from './treenilista.component';
-import { LoginService }          from './login.service';
-import { TreenipaivaService }          from './treenipaiva.service';
+import { LoginMenuComponent }       from './login-menu.component';
+import { TreenipaivatComponent }    from './treenipaivat.component';
+import { TreenipaivaComponent }     from './treenipaiva.component';
+import { TreenilistaComponent }     from './treenilista.component';
+import { LoginService }             from './login.service';
+import { TreenipaivaService }       from './treenipaiva.service';
 
 @NgModule({
   imports: [

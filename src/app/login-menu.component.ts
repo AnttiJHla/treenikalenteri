@@ -39,8 +39,7 @@ export class LoginMenuComponent  implements OnInit {
         this.loginService.login(this.email, this.password)
             .then(loginResponse => {
                 this.token = loginResponse;
-                console.log("User logged in + emitting an event.");
-                //this.userLoggedIn.emit(true);
+                console.log("User logged in : " + loginResponse);
                 this.loginStatus = "Kirjautunut";
             })
     }    
