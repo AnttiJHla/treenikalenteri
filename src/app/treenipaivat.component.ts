@@ -28,7 +28,7 @@ export class TreenipaivatComponent implements OnInit, OnChanges  {
   }  
 
   gotoDetail(id: number): void {
-    let link = ['http://127.0.0.1:8000/treenipaivat/', id];
+    let link = ['treenipaivat/', id];
     this.router.navigate(link);
   }
 
