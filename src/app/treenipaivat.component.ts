@@ -25,7 +25,6 @@ export class TreenipaivatComponent implements OnInit, OnChanges  {
 
   ngOnInit(): void {
     this.getTreenipaivat();
-    this.selectedTreenipaiva = this.treenipaivat[1];
   }  
 
   gotoDetail(id: number): void {
@@ -44,15 +43,12 @@ export class TreenipaivatComponent implements OnInit, OnChanges  {
           this.treenipaivaService.getTreenipaivat(token)
           .then(treenipaivat => {
               this.treenipaivat = treenipaivat;
-            this.selectedTreenipaiva = this.treenipaivat[1];
+              this.selectedTreenipaiva = this.treenipaivat[1];
             });
       } else {
           this.treenipaivat=[];
       }
   }
-//   gotoDetail(): void {
-//     this.router.navigate(['/detail', this.selectedTreenipaiva.id]);
-//   }
 //   add(name: string): void {
 //     name = name.trim();
 //     if (!name) { return; }
