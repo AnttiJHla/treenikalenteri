@@ -1,10 +1,15 @@
 <hr>
-  <nav class="navbar navbar-inverse">
-    <a class="navbar-brand" routerLink="/treenipaivat" routerLinkActive="active">Treenipaivalista</a>
-    <a class="navbar-brand" routerLink="/treenipaivat" routerLinkActive="active">Viikkonäkymä</a>
-    <a class="navbar-brand" routerLink="/treenipaivat" routerLinkActive="active">Kuukausinäkymä</a>
-    <a class="navbar-brand" routerLink="/rekisteroityminen" routerLinkActive="active">Rekisteröityminen</a>
-    <login-menu> </login-menu>
+  <nav class="navbar navbar-inverse" *ngIf="!userLoggedIn">
+    <a class="navbar-brand" *ngIf="!userLoggedIn" routerLink="/rekisteroityminen" routerLinkActive="active">Rekisteröityminen</a>
+    <input  [(ngModel)]="email" title="Email address"  placeholder="email" />
+    <input  [(ngModel)]="password" type="password"  title="Password" placeholder="password" />
+    <button (click)="login()" title="Login" class="btn btn-xs"><i class="glyphicon glyphicon-ok"></i></button>
+  </nav>
+  <nav class="navbar navbar-inverse" *ngIf="userLoggedIn">
+    <a class="navbar-brand" *ngIf="userLoggedIn" routerLink="/treenipaivat" routerLinkActive="active">Treenipaivalista</a>
+    <a class="navbar-brand" *ngIf="userLoggedIn" routerLink="/treenipaivat" routerLinkActive="active">Viikkonäkymä</a>
+    <a class="navbar-brand" *ngIf="userLoggedIn" routerLink="/treenipaivat" routerLinkActive="active">Kuukausinäkymä</a>
+    <a class="navbar-brand" *ngIf="!userLoggedIn" routerLink="/rekisteroityminen" routerLinkActive="active">Rekisteröityminen</a>
     <a class="navbar-brand" routerLink="/kayttaja" title="Käyttäjän tiedot" routerLinkActive="active"><i class="glyphicon glyphicon-user"></i></a>
   </nav>
   <hr>

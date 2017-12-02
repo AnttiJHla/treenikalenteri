@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 // Imports for loading & configuring the in-memory web api
 import { AppComponent }             from './app.component';
 import { UserDetailComponent }      from './user-detail.component';
-import { LoginMenuComponent }       from './login-menu.component';
 import { TreenipaivatComponent }    from './treenipaivat.component';
 import { TreenipaivaComponent }     from './treenipaiva.component';
 import { TreenilistaComponent }     from './treenilista.component';
@@ -26,7 +25,6 @@ import { TreenipaivaService }       from './treenipaiva.service';
   declarations: [
     AppComponent,
     UserDetailComponent,
-    LoginMenuComponent,
     TreenipaivatComponent,
     TreenipaivaComponent,
     TreenilistaComponent,
