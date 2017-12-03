@@ -14,8 +14,6 @@ import 'rxjs/add/operator/switchMap';
 })
 export class TreenipaivaComponent implements OnInit  {
     treenipaiva: Treenipaiva = null;
-    treenipaiva_id: number = 6;
-    myid: number = 6;
     //@Input() treenipaivax: Treenipaiva;
 
 
@@ -47,7 +45,7 @@ export class TreenipaivaComponent implements OnInit  {
   
   
   getTreenipaiva(): void { 
-        this.treenipaivaService.getTreenipaiva(this.myid)
+        this.treenipaivaService.getTreenipaiva(this.treenipaiva.id)
         .then(treenipaiva => {
             this.treenipaiva = treenipaiva;
             console.log("Luettiin treenipäivä: "+ treenipaiva);
