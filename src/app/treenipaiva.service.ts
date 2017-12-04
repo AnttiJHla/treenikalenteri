@@ -10,6 +10,7 @@ import { Treenipaiva } from './treenipaiva';
 export class TreenipaivaService {
 
     private treenipaivatUrl = 'http://127.0.0.1:8000/tk/treenipaivat/';  // URL to web api
+    private tkUrl = 'http://127.0.0.1:8000/tk/';  // URL to web api
 
     constructor(
         private http: Http,
@@ -58,6 +59,14 @@ export class TreenipaivaService {
             .put(this.treenipaivatUrl+treenipaiva["id"]+"/", treenipaiva, headers)
             .toPromise()
             .then(response => response.json() as Treenipaiva)
+            .catch(this.handleError);
+    }
+    deleteTreeni(id:number): Promise<any> {
+        var headers = this.getHeaders();
+        return this.http
+            .delete(this.tkUrl + "treenit/"+id+"/", headers)
+            .toPromise()
+            .then(response => response.json() as void)
             .catch(this.handleError);
     }
 

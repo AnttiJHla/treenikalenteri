@@ -1,5 +1,6 @@
 <h2>Treenipäivät</h2>
-<button (click)="getTreenipaivat()">Refresh</button>
+<button (click)="getTreenipaivat()"> Päivitä</button>
+<button (click)="createTreenipaiva()"> Lisää treenipäivä</button>
 <div *ngIf="treenipaivat" >
 <table class="table table-hover table table-striped">
     <thead>
@@ -20,7 +21,7 @@
             <td>{{treenipaiva.kuntoindeksi}}</td>
             <td>{{treenipaiva.huomiot}}</td>
             <td>
-                <treenilista [treenit]="treenipaiva.treenit"></treenilista>
+                <!--treenilista [treenit]="treenipaiva.treenit"></treenilista-->
             </td>
         </tr>
     </tbody>

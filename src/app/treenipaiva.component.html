@@ -1,29 +1,67 @@
 <!-- -------------------------------------------------------------------------->
 
 <h4>Treenipäivän muokkaus</h4>
-<input type="text" [(ngModel)]="myid"> MyID to read<br>
 <div *ngIf="treenipaiva">
-    <input type="text" [(ngModel)]="treenipaiva.id"> ID<br>
-    <input type="text" [(ngModel)]="treenipaiva.pvm"> Päivämäärä <br>
-    <input type="text" [(ngModel)]="treenipaiva.paino"> Paino<br>
-    <input type="text" [(ngModel)]="treenipaiva.kuntoindeksi"> Kuntoindeksi<br>
-    <input type="text" [(ngModel)]="treenipaiva.huomiot"> Huomiot <br>
-    <treenilista [treenit]="treenipaiva.treenit"></treenilista>
 
-    <!--div *ngFor="let treeni of treenipaiva.treenit">
-        <input [(ngModel)]="treenipaiva.treeni[index].id"><br>
-        <input [(ngModel)]="treenipaiva.treeni[index].laji"> Laji<br>
-        <input [(ngModel)]="treenipaiva.treeni[index].kesto"> Kesto<br>
-        <input [(ngModel)]="treenipaiva.treeni[index].keskisyke"> Keskisyke<br>
-        <input [(ngModel)]="treenipaiva.treeni[$index].maksimisyke"> Maksimisyke<br>
-        <input [(ngModel)]="treenipaiva.treeni[$index].kalorit"> Kalorit<br>
-        <input [(ngModel)]="treenipaiva.treeni[$index].paikka"> Paikka<br>
-        <button type="button" class="btn btn-default" (click)="delete()" title="Poista treeni"  data-toggle="tooltip"> Poista treeni</button>
-    </div-->
+    <div *ngIf="treenipaiva.id">
+        <label>ID</label>
+        <input type="text" [(ngModel)]="treenipaiva.id">
+    </div>
+    <div>
+        <label>Päivämäärä</label>
+        <input type="text" [(ngModel)]="treenipaiva.pvm"> 
+    </div>
+    <div>
+        <label>Paino</label>
+        <input type="text" [(ngModel)]="treenipaiva.paino">
+    </div>
+    <div>
+        <label>Kuntoindeksi</label>
+        <input type="text" [(ngModel)]="treenipaiva.kuntoindeksi"> 
+    </div>
+    <div>
+        <label>Huomiot</label>
+        <input type="text" [(ngModel)]="treenipaiva.huomiot"> 
+    </div>
+    <div> -------------------------  </div>
+    <!--treenilista [treenit]="treenipaiva.treenit"></treenilista-->
+
+    <div *ngFor="let treeni of treenipaiva.treenit; let index = index">
+        <div *ngIf="treeni.id">
+            <label>ID: </label>
+            <input [(ngModel)]="treeni.id" placeholder="ID" />
+            <button type="button"  class="btn btn-sm" (click)="deleteTreeni(treeni.id, index)" title="Poista treeni"  data-toggle="tooltip"> <i class="glyphicon glyphicon-remove"></i></button>
+        </div>
+        <div>
+            <label>Laji: </label>
+            <input [(ngModel)]="treeni.laji" placeholder="laji" />
+        </div>
+        <div>
+            <label>Kesto: </label>
+            <input [(ngModel)]="treeni.kesto" placeholder="kesto" />
+        </div>
+        <div>
+            <label>Keskisyke: </label>
+            <input [(ngModel)]="treeni.keskisyke" placeholder="keskisyke" />
+        </div>
+        <div>
+            <label>Maksimisyke: </label>
+            <input [(ngModel)]="treeni.maksimisyke" placeholder="maksimisyke" />
+        </div>
+        <div>
+            <label>Kalorit: </label>
+            <input [(ngModel)]="treeni.kalorit" placeholder="kalorit" />
+        </div>
+        <div>
+            <label>Paikka: </label>
+            <input [(ngModel)]="treeni.paikka" placeholder="paikka" />
+        </div>
+
+    </div>
 
 </div>
-<button type="button" class="btn btn-default" (click)="add()" title="Lisää treeni"  data-toggle="tooltip"> Lisää treeni </button>
-<button type="button" class="btn btn-default" (click)="getTreenipaiva(6)">Päivitä</button>
+<button type="button" class="btn btn-default" (click)="addTreeni()" title="Lisää treeni"  data-toggle="tooltip"> Lisää treeni </button>
+<button type="button" class="btn btn-default" (click)="getTreenipaiva()">Päivitä</button>
 <button type="button" class="btn btn-default" (click)="save()">Tallenna</button>
 <button type="button" class="btn btn-default" >Sulje</button>
 

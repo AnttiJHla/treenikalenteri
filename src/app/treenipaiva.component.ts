@@ -5,6 +5,7 @@ import { TreenipaivaService } from './treenipaiva.service';
 import { Router }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import 'rxjs/add/operator/switchMap';
+import { Treeni } from './treeni';
 
 @Component({
   selector: 'treenipaiva',
@@ -14,14 +15,15 @@ import 'rxjs/add/operator/switchMap';
 })
 export class TreenipaivaComponent implements OnInit  {
     treenipaiva: Treenipaiva = null;
-    //@Input() treenipaivax: Treenipaiva;
-
+    treeniTemplate : Treeni;
 
     constructor(
         private treenipaivaService: TreenipaivaService, 
         private route: ActivatedRoute,
         private location: Location,
-        ) { }
+        ) { 
+            this.treeniTemplate=<Treeni>{}
+        }
 
     ngOnInit(): void {
         this.route.paramMap
@@ -29,13 +31,26 @@ export class TreenipaivaComponent implements OnInit  {
         .subscribe(treenipaiva => this.treenipaiva = treenipaiva);
     }  
 
-    add(): void {
+    addTreeni(): void {
         console.log("Lisätään treeni");
+        this.treenipaiva.treenit.push(<Treeni>this.treeniTemplate);
     }  
     delete(): void {
-        console.log("Poistetaan treeni");
+        console.log("Poistetaan treenipaiva");
+
+    }  
+    deleteTreeni(id: number, index: number): void {
+        console.log("Poistetaan treeni: " + id + " index: " + index);
+        this.treenipaiva.treenit.splice(index,1);
+        console.log("Treenit: " + JSON.stringify(this.treenipaiva.treenit));
+        this.treenipaivaService.deleteTreeni(id)
+        .then(response => {
+            console.log("Poistettiin treeni");
+        });
     }  
     save(): void {
+        console.log("Tallennetaan treenipaiva: " + JSON.stringify(this.treenipaiva));
+        
         this.treenipaivaService.updateTreenipaiva(this.treenipaiva)
             .then(() => this.goBack());
     }  
