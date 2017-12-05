@@ -13,9 +13,12 @@ import { Router }   from '@angular/router';
 
 })
 export class TreenipaivatComponent implements OnInit, OnChanges  {
-  selectedTreenipaiva: Treenipaiva;
   treenipaivat: Treenipaiva[];
   @Input() userLoggedIn: boolean;
+  treenipaivaTemplate: Treenipaiva = <Treenipaiva> {
+    pvm : "2010-12-06",
+    treenit : [],
+  }
 
   constructor(
       private treenipaivaService: TreenipaivaService, 
@@ -43,19 +46,31 @@ export class TreenipaivatComponent implements OnInit, OnChanges  {
           this.treenipaivaService.getTreenipaivat(token)
           .then(treenipaivat => {
               this.treenipaivat = treenipaivat;
-              this.selectedTreenipaiva = this.treenipaivat[1];
             });
       } else {
           this.treenipaivat=[];
       }
   }
+  addTreenipaiva(): void {
+      console.log("Lisätään treeni");
+      //this.treenipaivat.push(<Treenipaiva> {});
+      this.treenipaivaService.createTreenipaiva(<Treenipaiva> this.treenipaivaTemplate )
+        .then(treenipaiva => {
+            this.treenipaivat.push(treenipaiva);
+            console.log("Luotiin uusi treenipäivä: "+ treenipaiva);
+            console.log("Navigoidaan uudelle sivulle: /treenipaivat/"+ treenipaiva.id);
+            let link = ['treenipaivat/', treenipaiva.id];
+            this.router.navigate(link);
+        });
+  }
+
+ 
 //   add(name: string): void {
 //     name = name.trim();
 //     if (!name) { return; }
 //     this.treenipaivaService.create(name)
 //       .then(treenipaiva => {
 //         this.treenipaivat.push(treenipaiva);
-//         this.selectedTreenipaiva = null;
 //       });
 //   }
 //   delete(treenipaiva: Treenipaiva): void {
@@ -63,7 +78,6 @@ export class TreenipaivatComponent implements OnInit, OnChanges  {
 //         .delete(treenipaiva.id)
 //         .then(() => {
 //           this.treenipaivat = this.treenipaivat.filter(h => h !== treenipaiva);
-//           if (this.selectedTreenipaiva === treenipaiva) { this.selectedTreenipaiva = null; }
 //         });
 //   }    
 }
