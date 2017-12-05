@@ -21,7 +21,7 @@ export class AppComponent  implements OnInit {
     private headers = new Headers({'Content-Type': 'application/json'});    
   
     password : string = "password1234";
-    email : string = "user1@live.com";   
+    email : string = "ana@live.com";   
     loginStatus="";
 
     constructor(
