@@ -9,7 +9,6 @@ import { Treenipaiva } from './treenipaiva';
 @Injectable()
 export class TreenipaivaService {
 
-    private treenipaivatUrl = 'http://127.0.0.1:8000/tk/treenipaivat/';  // URL to web api
     private tkUrl = 'http://127.0.0.1:8000/tk/';  // URL to web api
 
     constructor(
@@ -34,7 +33,7 @@ export class TreenipaivaService {
     getTreenipaivat(token : string): Promise<Treenipaiva[]> {
         console.log("Trying to get treenipaivat"); 
         if (this.loginService.userHasLoggedIn()) {
-            return this.http.get(this.treenipaivatUrl, this.getHeaders())
+            return this.http.get(this.tkUrl + "treenipaivat/", this.getHeaders())
                 .toPromise()
                 .then(response => response.json().results as Treenipaiva[])
                 .catch(this.handleError);
@@ -45,7 +44,7 @@ export class TreenipaivaService {
     getTreenipaiva(id : number): Promise<Treenipaiva> {
         console.log("Trying to get treenipaiva -- " + id); 
         if (this.loginService.userHasLoggedIn()) {
-            return this.http.get(this.treenipaivatUrl+id+"/", this.getHeaders())
+            return this.http.get(this.tkUrl + "treenipaivat/"+id+"/", this.getHeaders())
                     .toPromise()
                     .then(response => response.json() as Treenipaiva)
                     .catch(this.handleError);
@@ -56,9 +55,25 @@ export class TreenipaivaService {
     updateTreenipaiva(treenipaiva:Treenipaiva): Promise<Treenipaiva> {
         var headers = this.getHeaders();
         return this.http
-            .put(this.treenipaivatUrl+treenipaiva["id"]+"/", treenipaiva, headers)
+            .put(this.tkUrl + "treenipaivat/"+treenipaiva["id"]+"/", treenipaiva, headers)
             .toPromise()
             .then(response => response.json() as Treenipaiva)
+            .catch(this.handleError);
+    }
+    createTreenipaiva(treenipaiva:Treenipaiva): Promise<Treenipaiva> {
+        var headers = this.getHeaders();
+        return this.http
+            .post(this.tkUrl + "treenipaivat/", treenipaiva, headers)
+            .toPromise()
+            .then(response => response.json() as Treenipaiva)
+            .catch(this.handleError);
+    }
+    deleteTreenipaiva(id:number): Promise<any> {
+        var headers = this.getHeaders();
+        return this.http
+            .delete(this.tkUrl + "treenipaivat/"+id+"/", headers)
+            .toPromise()
+            .then(response => response.json() as void)
             .catch(this.handleError);
     }
     deleteTreeni(id:number): Promise<any> {
