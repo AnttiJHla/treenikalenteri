@@ -1,15 +1,10 @@
-<!-- -------------------------------------------------------------------------->
 
 <h4>Treenipäivän muokkaus</h4>
-<div *ngIf="treenipaiva">
-
-    <div *ngIf="treenipaiva.id">
-        <label>ID</label>
-        <input type="text" [(ngModel)]="treenipaiva.id">
-    </div>
+<div *ngIf="treenipaiva" class="panel panel-heading">
     <div>
         <label>Päivämäärä</label>
         <input type="text" [(ngModel)]="treenipaiva.pvm"> 
+        <button  *ngIf="treenipaiva.id" type="button"  class="btn btn-sm" (click)="deleteTreenipaiva()" title="Poista treenipäivä"  data-toggle="tooltip"> <i class="glyphicon glyphicon-trash"></i></button>
     </div>
     <div>
         <label>Paino</label>
@@ -23,18 +18,13 @@
         <label>Huomiot</label>
         <input type="text" [(ngModel)]="treenipaiva.huomiot"> 
     </div>
-    <div> -------------------------  </div>
-    <!--treenilista [treenit]="treenipaiva.treenit"></treenilista-->
+    
 
-    <div *ngFor="let treeni of treenipaiva.treenit; let index = index">
-        <div *ngIf="treeni.id">
-            <label>ID: </label>
-            <input [(ngModel)]="treeni.id" placeholder="ID" />
-            <button type="button"  class="btn btn-sm" (click)="deleteTreeni(treeni.id, index)" title="Poista treeni"  data-toggle="tooltip"> <i class="glyphicon glyphicon-remove"></i></button>
-        </div>
+    <div class="panel panel-default" *ngFor="let treeni of treenipaiva.treenit; let index = index">
         <div>
             <label>Laji: </label>
             <input [(ngModel)]="treeni.laji" placeholder="laji" />
+            <button *ngIf="treeni.id" type="button"  class="btn btn-sm" (click)="deleteTreeni(treeni.id, index)" title="Poista treeni"  data-toggle="tooltip"> <i class="glyphicon glyphicon-trash"></i></button>
         </div>
         <div>
             <label>Kesto: </label>
@@ -60,9 +50,9 @@
     </div>
 
 </div>
-<button type="button" class="btn btn-default" (click)="addTreeni()" title="Lisää treeni"  data-toggle="tooltip"> Lisää treeni </button>
-<button type="button" class="btn btn-default" (click)="getTreenipaiva()">Päivitä</button>
-<button type="button" class="btn btn-default" (click)="save()">Tallenna</button>
-<button type="button" class="btn btn-default" >Sulje</button>
+<button type="button" class="btn btn-default" (click)="addTreeni()" title="Lisää treeni"  data-toggle="tooltip"><i class="glyphicon glyphicon-plus"></i>  Lisää treeni </button>
+<button type="button" class="btn btn-default" (click)="getTreenipaiva()"><i class="glyphicon glyphicon-refresh"></i> Päivitä</button>
+<button type="button" class="btn btn-default" (click)="save()"><i class="glyphicon glyphicon-floppy-disk"></i> Tallenna</button>
+<button type="button" class="btn btn-default" routerLink="/treenipaivat" routerLinkActive="active"><i class="glyphicon glyphicon-arrow-left"></i> Edellinen sivu</button>
 
 
