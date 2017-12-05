@@ -20,6 +20,7 @@ export class TreenipaivaComponent implements OnInit  {
     constructor(
         private treenipaivaService: TreenipaivaService, 
         private route: ActivatedRoute,
+        private router: Router,
         private location: Location,
         ) { 
             this.treeniTemplate=<Treeni>{}
@@ -35,9 +36,16 @@ export class TreenipaivaComponent implements OnInit  {
         console.log("Lisätään treeni");
         this.treenipaiva.treenit.push(<Treeni>this.treeniTemplate);
     }  
-    delete(): void {
-        console.log("Poistetaan treenipaiva");
-
+    deleteTreenipaiva(): void {
+        console.log("Poistetaan treenipaiva: " + this.treenipaiva.id);
+        this.treenipaivaService.deleteTreenipaiva(this.treenipaiva.id)
+        .then(response => {
+            console.log("Poistettiin treenipäivä");
+            console.log("Navigoidaan takaisin sivulle: /treenipaivat/");
+            let link = ['treenipaivat/'];
+            this.router.navigate(link);
+            
+        });
     }  
     deleteTreeni(id: number, index: number): void {
         console.log("Poistetaan treeni: " + id + " index: " + index);
@@ -49,10 +57,9 @@ export class TreenipaivaComponent implements OnInit  {
         });
     }  
     save(): void {
-        console.log("Tallennetaan treenipaiva: " + JSON.stringify(this.treenipaiva));
-        
+        console.log("Tallennetaan treenipaiva: " + JSON.stringify(this.treenipaiva));        
         this.treenipaivaService.updateTreenipaiva(this.treenipaiva)
-            .then(() => this.goBack());
+            .then((treenipaiva) => this.treenipaiva=treenipaiva);
     }  
     goBack(): void {
          
