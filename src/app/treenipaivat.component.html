@@ -1,28 +1,34 @@
-<h2>Treenipäivät</h2>
-<button (click)="getTreenipaivat()"> Päivitä</button>
-<button (click)="createTreenipaiva()"> Lisää treenipäivä</button>
-<div *ngIf="treenipaivat" >
+<div class="container">
+<h2>Treenipäivälista</h2>
+<button (click)="getTreenipaivat()"><i class="glyphicon glyphicon-refresh"></i>  Päivitä</button>
+<button (click)="addTreenipaiva()"><i class="glyphicon glyphicon-plus"></i> Lisää treenipäivä</button>
+
+</div>
+<div *ngIf="treenipaivat" class="container">
 <table class="table table-hover table table-striped">
     <thead>
         <tr>
-            <td>Id</td>
             <td>Pvm</td>
+            <td>Treenit</td>
             <td>paino</td>
             <td>Kuntoindeksi</td>
             <td>Huomiot</td>
-            <td>Treenit</td>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let treenipaiva of treenipaivat"  >
-            <td (click)="gotoDetail(treenipaiva.id)">{{treenipaiva.id}}</td>
-            <td>{{treenipaiva.pvm}}</td>
+            <td>
+                <a routerLink="/treenipaivat/{{treenipaiva.id}}/" routerLinkActive="active">{{treenipaiva.pvm}}</a>
+            </td>
+            <td>
+                <div class="" *ngFor="let treeni of treenipaiva.treenit; let index = index">
+                    <div> {{treeni.laji}}</div>
+                </div>
+            </td>
             <td>{{treenipaiva.paino}}</td>
             <td>{{treenipaiva.kuntoindeksi}}</td>
             <td>{{treenipaiva.huomiot}}</td>
-            <td>
-                <!--treenilista [treenit]="treenipaiva.treenit"></treenilista-->
-            </td>
+            
         </tr>
     </tbody>
 </table> 
