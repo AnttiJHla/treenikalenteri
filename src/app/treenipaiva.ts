@@ -6,5 +6,6 @@ export class Treenipaiva {
     treenit : Treeni[];  
     kuntoindeksi : number;
     paino : number; 
+    huomiot: string;
 
 }

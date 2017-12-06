@@ -1,0 +1,17 @@
+<p>
+  treeni-kk works!
+</p>
+
+<div class="container">
+  <h1>Kuukausinäkymä</h1>
+  <div>
+    <h2>Viikko1</h2>
+    <div class="kk-nakyma" *ngFor="let tp of treenipaivalista; let index = index">
+        <div [ngClass]="(index!=6 && index !=13 && index !=20 && index !=27) ? 'myblock':'myinline'">
+            {{tp.pvm}} 
+          <div> {{ index }} </div>
+        </div>
+    </div>
+
+  </div>
+</div>
