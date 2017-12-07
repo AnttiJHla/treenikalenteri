@@ -1,15 +1,37 @@
-<p>
-  treeni-kk works!
-</p>
-
 <div class="container">
-  <h1>Kuukausinäkymä</h1>
+  <h2>Kuukausinäkymä</h2>
   <div>
-    <h2>Viikko1</h2>
+    <div class="my-header" *ngFor="let paiva of viikonpaivat"> {{paiva}} </div>
     <div class="kk-nakyma" *ngFor="let tp of treenipaivalista; let index = index">
         <div [ngClass]="(index!=6 && index !=13 && index !=20 && index !=27) ? 'myblock':'myinline'">
+        <!--div [ngClass]="getTreenipaivaClass()"-->
             {{tp.pvm}} 
-          <div> {{ index }} </div>
+          <div *ngIf="tp.treenipaiva">
+            <div *ngFor="let treeni of tp.treenipaiva.treenit">
+              <div>
+                Laji: {{treeni.laji}} 
+              </div>
+              <div *ngIf="treeni.kesto">
+                Kesto: {{treeni.kesto}}
+              </div>
+              <div *ngIf="treeni.kcal">
+                Kcal: {{treeni.kcal}}
+              </div>
+              <div *ngIf="treeni.keskisyke">
+                Avg: {{treeni.keskisyke}}
+              </div>
+              <div *ngIf="treeni.maksimisyke">
+                Max: {{treeni.maksimisyke}}
+              </div>
+
+            </div>
+            <div *ngIf="tp.treenipaiva.huomiot">
+              Huomiot: {{tp.treenipaiva.huomiot}}
+            </div>
+            <div *ngIf="tp.treenipaiva.kuntoindeksi">
+              Kuntoindeksi: {{tp.treenipaiva.kuntoindeksi}}
+            </div>
+          </div>
         </div>
     </div>
 

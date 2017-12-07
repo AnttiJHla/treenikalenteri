@@ -11,7 +11,6 @@ import { AppComponent }             from './app.component';
 import { UserDetailComponent }      from './user-detail.component';
 import { TreenipaivatComponent }    from './treenipaivat.component';
 import { TreenipaivaComponent }     from './treenipaiva.component';
-import { TreenilistaComponent }     from './treenilista.component';
 import { LoginService }             from './login.service';
 import { TreenipaivaService }       from './treenipaiva.service';
 import { TreeniKkComponent } from './treeni-kk/treeni-kk.component';
@@ -21,15 +20,14 @@ import { TreeniKkComponent } from './treeni-kk/treeni-kk.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   declarations: [
     AppComponent,
     UserDetailComponent,
     TreenipaivatComponent,
     TreenipaivaComponent,
-    TreenilistaComponent,
-    TreeniKkComponent,
+    TreeniKkComponent
   ],
   providers: [ 
     LoginService,

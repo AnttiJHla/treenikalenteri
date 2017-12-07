@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Router }   from '@angular/router';
+import { Router }                 from '@angular/router';
 import { Location }                 from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 
@@ -32,6 +32,7 @@ export class AppComponent  implements OnInit {
     ) {}
 
     ngOnInit(): void {
+      this.login();
     }
 
     login(): void {

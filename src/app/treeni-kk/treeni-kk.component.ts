@@ -6,7 +6,7 @@ import { LoginService } from '../login.service';
 import { TreenipaivaService } from '../treenipaiva.service';
 import { OnInit } from '@angular/core';
 import { Router }   from '@angular/router';
-import { Treenipaivalista } from "../treenipaivalista";
+import { TreenipaivaPvm } from "../treenipaiva-pvm";
 
 
 
@@ -21,7 +21,7 @@ export class TreeniKkComponent implements OnInit, OnChanges  {
   treenipaivat: Treenipaiva[];
   treenipaiva:  Treenipaiva; // Only for development purposes
   viikonpaivat : string[] = ["Ma","Ti","Ke","To","Pe","La","Su"];
-  treenipaivalista : Treenipaiva[] = [];
+  treenipaivalista : TreenipaivaPvm[] = [];
   @Input() userLoggedIn: boolean;
   treenipaivaTemplate: Treenipaiva = <Treenipaiva> {
     pvm : "2017-12-06",
@@ -45,6 +45,20 @@ export class TreeniKkComponent implements OnInit, OnChanges  {
     this.router.navigate(link);
   }
 
+  // getTreenipaivaClass(tp: TreenipaivaPvm): any {
+  //   var isSunday=false;
+  //   var hasKuntoindeksi = false;
+  //   if (tp.weekday == 0){
+  //     isSunday = true;
+  //   }
+  //   if (tp.treenipaiva.kuntoindeksi != null){
+  //     hasKuntoindeksi = true;
+  //   }
+  //   return {myblock: isSunday, myinline: !isSunday, green: hasKuntoindeksi}
+
+  //   //if (index!=6 && index !=13 && index !=20 && index !=27) ? 'myblock':'myinline'"
+  // }
+
   alustaTreenipaivalista(): void { 
     console.log("alustetaan treenipäivälista");
     var date1 = new Date();
@@ -53,9 +67,11 @@ export class TreeniKkComponent implements OnInit, OnChanges  {
     for (var i=1; i<=28; i++) {
       var tmp = new Date(+ date1 + (i-weekday+7-28)*1000*24*60*60);
       console.log("Pvm: " + tmp.toISOString().split("T")[0]);
-      var tp = new Treenipaiva();
-      tp.id=0;
+      var tp = new TreenipaivaPvm();
       tp.pvm=tmp.toISOString().split("T")[0];
+      tp.weekday=tmp.getDay();
+      console.log("Weekday: " + tp.weekday);
+      tp.treenipaiva=this.getTreenipaiva(tp.pvm);
       this.treenipaivalista.push(tp);
     }
     
@@ -64,6 +80,16 @@ export class TreeniKkComponent implements OnInit, OnChanges  {
     let log: string[] = [];
     console.log(`User trying to log in`);
     }
+
+  getTreenipaiva(pvm:string): Treenipaiva { 
+    var tp : Treenipaiva = null;
+    // Find treenipaiva with date pvm
+    for (var i = 0; i < this.treenipaivat.length; i++){
+      if (this.treenipaivat[i].pvm === pvm)
+        tp = this.treenipaivat[i]
+    }
+    return tp;
+  }
   
   getTreenipaivat(): void { 
       if (this.loginService.userHasLoggedIn()) {

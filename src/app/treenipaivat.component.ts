@@ -16,7 +16,7 @@ export class TreenipaivatComponent implements OnInit, OnChanges  {
   treenipaivat: Treenipaiva[];
   @Input() userLoggedIn: boolean;
   treenipaivaTemplate: Treenipaiva = <Treenipaiva> {
-    pvm : "2010-12-06",
+    pvm : "2017-11-30",
     treenit : [],
   }
 
