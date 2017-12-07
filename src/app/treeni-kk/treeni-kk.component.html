@@ -1,21 +1,37 @@
 <div class="container">
   <h2>Kuukausinäkymä</h2>
   <div>
-    <div class="my-header" *ngFor="let paiva of viikonpaivat"> {{paiva}} </div>
+    <div class="my-header bg-primary" *ngFor="let paiva of viikonpaivat"> {{paiva}} </div>
     <div class="kk-nakyma" *ngFor="let tp of treenipaivalista; let index = index">
         <div [ngClass]="(index!=6 && index !=13 && index !=20 && index !=27) ? 'myblock':'myinline'">
         <!--div [ngClass]="getTreenipaivaClass()"-->
-            {{tp.pvm}} 
+          
+          <div class="bg-info date">
+            <a  *ngIf="tp.treenipaiva" routerLink="/treenipaivat/{{tp.treenipaiva?.id}}" routerLinkActive="active">
+              {{tp.pvm}}
+            </a>
+          </div>
+          <div class="bg-info date" *ngIf="!tp.treenipaiva">{{tp.pvm}}</div>
+             
           <div *ngIf="tp.treenipaiva">
+            <div class="bg-success" *ngIf="tp.treenipaiva.kuntoindeksi">
+              Kuntoindeksi: {{tp.treenipaiva.kuntoindeksi}}
+            </div>
+            <div *ngIf="tp.treenipaiva.paino">
+              Paino: {{tp.treenipaiva.paino}} kg
+            </div>
+            <div *ngIf="tp.treenipaiva.huomiot">
+              Huomiot: {{tp.treenipaiva.huomiot}}
+            </div>
             <div *ngFor="let treeni of tp.treenipaiva.treenit">
               <div>
                 Laji: {{treeni.laji}} 
               </div>
               <div *ngIf="treeni.kesto">
-                Kesto: {{treeni.kesto}}
+                Kesto: {{treeni.kesto}} min
               </div>
               <div *ngIf="treeni.kcal">
-                Kcal: {{treeni.kcal}}
+                Kcal: {{treeni.kcal}} kcal
               </div>
               <div *ngIf="treeni.keskisyke">
                 Avg: {{treeni.keskisyke}}
@@ -24,12 +40,6 @@
                 Max: {{treeni.maksimisyke}}
               </div>
 
-            </div>
-            <div *ngIf="tp.treenipaiva.huomiot">
-              Huomiot: {{tp.treenipaiva.huomiot}}
-            </div>
-            <div *ngIf="tp.treenipaiva.kuntoindeksi">
-              Kuntoindeksi: {{tp.treenipaiva.kuntoindeksi}}
             </div>
           </div>
         </div>

@@ -45,6 +45,7 @@ export class TreeniKkComponent implements OnInit, OnChanges  {
     this.router.navigate(link);
   }
 
+  // ngClass supports array of strings also:
   // getTreenipaivaClass(tp: TreenipaivaPvm): any {
   //   var isSunday=false;
   //   var hasKuntoindeksi = false;
