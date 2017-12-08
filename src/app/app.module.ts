@@ -14,6 +14,7 @@ import { TreenipaivaComponent }     from './treenipaiva.component';
 import { LoginService }             from './login.service';
 import { TreenipaivaService }       from './treenipaiva.service';
 import { TreeniKkComponent } from './treeni-kk/treeni-kk.component';
+import { CreateTreenipaivaComponent } from './treenipaiva/create-treenipaiva.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { TreeniKkComponent } from './treeni-kk/treeni-kk.component';
     UserDetailComponent,
     TreenipaivatComponent,
     TreenipaivaComponent,
-    TreeniKkComponent
+    TreeniKkComponent,
+    CreateTreenipaivaComponent
   ],
   providers: [ 
     LoginService,

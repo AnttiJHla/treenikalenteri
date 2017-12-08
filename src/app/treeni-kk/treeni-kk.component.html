@@ -10,8 +10,11 @@
             <a  *ngIf="tp.treenipaiva" routerLink="/treenipaivat/{{tp.treenipaiva?.id}}" routerLinkActive="active">
               {{tp.pvm}}
             </a>
+            <a  *ngIf="!tp.treenipaiva" routerLink="/treenipaivat/new/{{tp.pvm}}" routerLinkActive="active">
+              {{tp.pvm}}
+            </a>
           </div>
-          <div class="bg-info date" *ngIf="!tp.treenipaiva">{{tp.pvm}}</div>
+
              
           <div *ngIf="tp.treenipaiva">
             <div class="bg-success" *ngIf="tp.treenipaiva.kuntoindeksi">

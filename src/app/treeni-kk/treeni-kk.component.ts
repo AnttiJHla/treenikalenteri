@@ -8,10 +8,6 @@ import { OnInit } from '@angular/core';
 import { Router }   from '@angular/router';
 import { TreenipaivaPvm } from "../treenipaiva-pvm";
 
-
-
-
-
 @Component({
   templateUrl: './treeni-kk.component.html',
   styleUrls: [ './treeni-kk.component.css' ],
@@ -81,10 +77,11 @@ export class TreeniKkComponent implements OnInit, OnChanges  {
     let log: string[] = [];
     console.log(`User trying to log in`);
     }
-
+  
+  // Find treenipaiva with date pvm
   getTreenipaiva(pvm:string): Treenipaiva { 
     var tp : Treenipaiva = null;
-    // Find treenipaiva with date pvm
+
     for (var i = 0; i < this.treenipaivat.length; i++){
       if (this.treenipaivat[i].pvm === pvm)
         tp = this.treenipaivat[i]
@@ -106,13 +103,13 @@ export class TreeniKkComponent implements OnInit, OnChanges  {
           this.treenipaivat=[];
       }
   }
+
   addTreenipaiva(): void {
-      console.log("Lisätään treeni");
-      //this.treenipaivat.push(<Treenipaiva> {});
+      console.log("Lisätään päivä");
       this.treenipaivaService.createTreenipaiva(<Treenipaiva> this.treenipaivaTemplate )
         .then(treenipaiva => {
             this.treenipaivat.push(treenipaiva);
-            console.log("Luotiin uusi treenipäivä: "+ treenipaiva);
+            console.log("Luotiin uusi treenipäivä: "+ treenipaiva.id);
             console.log("Navigoidaan uudelle sivulle: /treenipaivat/"+ treenipaiva.id);
             let link = ['treenipaivat/', treenipaiva.id];
             this.router.navigate(link);

@@ -61,7 +61,9 @@ export class TreenipaivaComponent implements OnInit  {
         this.treenipaivaService.updateTreenipaiva(this.treenipaiva)
             .then((treenipaiva) => this.treenipaiva=treenipaiva);
     }  
+
     goBack(): void {
+        
          
     }
   
