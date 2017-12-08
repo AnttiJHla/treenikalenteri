@@ -1,7 +1,13 @@
 <div class="container">
 <h2>Treenipäivälista</h2>
-<button (click)="getTreenipaivat()"><i class="glyphicon glyphicon-refresh"></i>  Päivitä</button>
-<button (click)="addTreenipaiva()"><i class="glyphicon glyphicon-plus"></i> Lisää treenipäivä</button>
+<button (click)="getTreenipaivat()">
+    <i class="glyphicon glyphicon-refresh"></i>
+    Päivitä
+</button>
+<button (click)="addTreenipaiva()">
+    <i class="glyphicon glyphicon-plus"></i> 
+    Lisää treenipäivä
+</button>
 
 </div>
 <div *ngIf="treenipaivat" class="container">

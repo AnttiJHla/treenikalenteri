@@ -17,6 +17,7 @@ export class TreeniKkComponent implements OnInit, OnChanges  {
   treenipaivat: Treenipaiva[];
   treenipaiva:  Treenipaiva; // Only for development purposes
   viikonpaivat : string[] = ["Ma","Ti","Ke","To","Pe","La","Su"];
+  viikkonumerot: number[] =[1,2,3,4];
   treenipaivalista : TreenipaivaPvm[] = [];
   @Input() userLoggedIn: boolean;
   treenipaivaTemplate: Treenipaiva = <Treenipaiva> {
@@ -42,19 +43,24 @@ export class TreeniKkComponent implements OnInit, OnChanges  {
   }
 
   // ngClass supports array of strings also:
-  // getTreenipaivaClass(tp: TreenipaivaPvm): any {
-  //   var isSunday=false;
-  //   var hasKuntoindeksi = false;
-  //   if (tp.weekday == 0){
-  //     isSunday = true;
-  //   }
-  //   if (tp.treenipaiva.kuntoindeksi != null){
-  //     hasKuntoindeksi = true;
-  //   }
-  //   return {myblock: isSunday, myinline: !isSunday, green: hasKuntoindeksi}
+  getTreenipaivaClass(tp): any {
+    var retVal : string[] = [];
+    // var isSunday=false;
+    // var hasKuntoindeksi = false;
+    // if (tp.weekday == 0){
+    //   isSunday = true;
+    // }
+    // if (tp.treenipaiva.kuntoindeksi != null){
+    //   hasKuntoindeksi = true;
+    // }
+    // return {myblock: isSunday, myinline: !isSunday, green: hasKuntoindeksi}
 
-  //   //if (index!=6 && index !=13 && index !=20 && index !=27) ? 'myblock':'myinline'"
-  // }
+    if (tp.weekday != 0) 
+      retVal.push("myblock");
+    else 
+      retVal.push("myinline");
+    return retVal;
+  }
 
   alustaTreenipaivalista(): void { 
     console.log("alustetaan treenipäivälista");
@@ -77,7 +83,7 @@ export class TreeniKkComponent implements OnInit, OnChanges  {
     let log: string[] = [];
     console.log(`User trying to log in`);
     }
-  
+
   // Find treenipaiva with date pvm
   getTreenipaiva(pvm:string): Treenipaiva { 
     var tp : Treenipaiva = null;

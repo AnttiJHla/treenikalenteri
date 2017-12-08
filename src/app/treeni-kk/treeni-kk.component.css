@@ -1,11 +1,10 @@
 .container {
-    min-width: 1100px;
+    min-width: 1200px;
 }
 .my-header {
     width: 150px;
     display: inline-block;
     border: 1px solid black; 
-    clear: right;
     text-align: center;
 }
 .myblock {
@@ -18,11 +17,41 @@
 .myinline {
     width: 150px;
     height:150px;
-    display: inline-block;
     border: 1px solid black; 
     clear: right;
     overflow: auto;
 }
 .date {
     text-align: center;
+}
+.cell-border {
+    border: 1px solid black; 
+}
+.day-column {
+    width: 150px;
+}
+.treeniviikot {
+    min-width: 1100px;
+    float: left;
+    clear: left;
+}
+.vko-column {
+    width: 50px;
+    float: left;
+    clear: left;
+}
+.vko-header {    
+    border: 1px solid black; 
+    width: 50px;
+    text-align: center;
+    float: left;
+    clear: left;
+}
+.vko {
+    border: 1px solid black; 
+    width: 50px;
+    text-align: center;
+    clear: left;    
+    float: left;
+    height:150px;
 }

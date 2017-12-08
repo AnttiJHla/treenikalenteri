@@ -17,7 +17,6 @@ export class CreateTreenipaivaComponent implements OnInit {
       treenit : [],
     };
 
-    dummy = {};
 
     treeniTemplate : Treeni;
     treenipvm : string = "";
@@ -29,7 +28,6 @@ export class CreateTreenipaivaComponent implements OnInit {
         private location: Location,
         ) { 
             this.treeniTemplate=<Treeni>{}           
-            this.treenipaiva.pvm = "2017-11-11";
             this.route.paramMap.subscribe((params: ParamMap) => this.treenipaiva.pvm = params.get('date') );
         }
 
