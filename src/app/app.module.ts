@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent }             from './app.component';
 import { UserDetailComponent }      from './user-detail.component';
 import { TreenipaivatComponent }    from './treenipaivat.component';
-import { TreenipaivaComponent }     from './treenipaiva.component';
+import { TreenipaivaComponent }     from './treenipaiva/treenipaiva.component';
 import { LoginService }             from './login.service';
 import { TreenipaivaService }       from './treenipaiva.service';
 import { TreeniKkComponent } from './treeni-kk/treeni-kk.component';

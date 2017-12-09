@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Treenipaiva } from './treenipaiva';
-import { TreenipaivaService } from './treenipaiva.service';
+import { Treenipaiva } from '../treenipaiva';
+import { TreenipaivaService } from '../treenipaiva.service';
 import { Router }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import 'rxjs/add/operator/switchMap';
-import { Treeni } from './treeni';
+import { Treeni } from '../treeni';
 
 @Component({
   selector: 'treenipaiva',
