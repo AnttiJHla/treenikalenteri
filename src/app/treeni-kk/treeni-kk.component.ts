@@ -45,16 +45,6 @@ export class TreeniKkComponent implements OnInit, OnChanges  {
   // ngClass supports array of strings also:
   getTreenipaivaClass(tp): any {
     var retVal : string[] = [];
-    // var isSunday=false;
-    // var hasKuntoindeksi = false;
-    // if (tp.weekday == 0){
-    //   isSunday = true;
-    // }
-    // if (tp.treenipaiva.kuntoindeksi != null){
-    //   hasKuntoindeksi = true;
-    // }
-    // return {myblock: isSunday, myinline: !isSunday, green: hasKuntoindeksi}
-
     if (tp.weekday != 0) 
       retVal.push("myblock");
     else 

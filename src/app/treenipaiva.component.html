@@ -50,9 +50,21 @@
     </div>
 
 </div>
-<button type="button" class="btn btn-default" (click)="addTreeni()" title="Lisää treeni"  data-toggle="tooltip"><i class="glyphicon glyphicon-plus"></i>  Lisää treeni </button>
-<button type="button" class="btn btn-default" (click)="getTreenipaiva()"><i class="glyphicon glyphicon-refresh"></i> Päivitä</button>
-<button type="button" class="btn btn-default" (click)="save()"><i class="glyphicon glyphicon-floppy-disk"></i> Tallenna</button>
-<button type="button" class="btn btn-default" routerLink="/treenipaivat" routerLinkActive="active"><i class="glyphicon glyphicon-arrow-left"></i> Edellinen sivu</button>
+<button type="button" class="btn btn-default" (click)="addTreeni()" title="Lisää treeni"  data-toggle="tooltip">
+    <i class="glyphicon glyphicon-plus"></i>  
+    Lisää treeni 
+</button>
+<button *ngIf="treenipaiva?.id" type="button" class="btn btn-default" (click)="getTreenipaiva(treenipaiva.id)">
+    <i class="glyphicon glyphicon-refresh"></i> 
+    Päivitä
+</button>
+<button type="button" class="btn btn-default" (click)="save()">
+    <i class="glyphicon glyphicon-floppy-disk"></i> 
+    Tallenna
+</button>
+<button type="button" class="btn btn-default" routerLink="/treenipaivat" routerLinkActive="active">
+    <i class="glyphicon glyphicon-arrow-left"></i>
+     Edellinen sivu
+</button>
 
 

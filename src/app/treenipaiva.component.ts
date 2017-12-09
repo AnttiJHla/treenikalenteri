@@ -14,8 +14,16 @@ import { Treeni } from './treeni';
 
 })
 export class TreenipaivaComponent implements OnInit  {
-    treenipaiva: Treenipaiva = null;
+    //treenipaiva: Treenipaiva = null;
+    treenipaiva = <Treenipaiva> {
+      pvm : "2017-11-30",
+      treenit : [],
+    };
+
+
     treeniTemplate : Treeni;
+    
+    //treeniTemplate : Treeni;
 
     constructor(
         private treenipaivaService: TreenipaivaService, 
@@ -26,11 +34,30 @@ export class TreenipaivaComponent implements OnInit  {
             this.treeniTemplate=<Treeni>{}
         }
 
+    // old_ngOnInit(): void {
+    //     this.route.paramMap
+    //     .switchMap((params: ParamMap) => this.treenipaivaService.getTreenipaiva(+params.get('id')))
+    //     .subscribe(treenipaiva => this.treenipaiva = treenipaiva);
+    // }  
     ngOnInit(): void {
         this.route.paramMap
-        .switchMap((params: ParamMap) => this.treenipaivaService.getTreenipaiva(+params.get('id')))
-        .subscribe(treenipaiva => this.treenipaiva = treenipaiva);
+        .subscribe(
+            (params: ParamMap) => this.doStuff(params.get('id'),params.get('date'))
+        );        
     }  
+
+    doStuff(id : string, date : string):void {
+        console.log("ID-kenttä:" + id);
+        if (id==="new") {
+            console.log("Luodaan uusi treenipäivä.");
+            console.log("jolla treenipäivä:" + date);
+            this.treenipaiva.pvm=date;
+        } else {
+            console.log("Luetaan treenipäivän tiedot palvelusta.");
+            this.getTreenipaiva(+id);
+        }
+    }
+
 
     addTreeni(): void {
         console.log("Lisätään treeni");
@@ -58,18 +85,22 @@ export class TreenipaivaComponent implements OnInit  {
     }  
     save(): void {
         console.log("Tallennetaan treenipaiva: " + JSON.stringify(this.treenipaiva));        
-        this.treenipaivaService.updateTreenipaiva(this.treenipaiva)
-            .then((treenipaiva) => this.treenipaiva=treenipaiva);
+        if (this.treenipaiva.id ) {
+          this.treenipaivaService.updateTreenipaiva(<Treenipaiva> this.treenipaiva)
+            .then((treenipaiva) => this.treenipaiva = <any> treenipaiva);
+        } else {
+          this.treenipaivaService.createTreenipaiva(<Treenipaiva> this.treenipaiva)
+            .then((treenipaiva) => this.treenipaiva = <any> treenipaiva);
+        }
     }  
 
     goBack(): void {
-        
-         
+                 
     }
   
   
-  getTreenipaiva(): void { 
-        this.treenipaivaService.getTreenipaiva(this.treenipaiva.id)
+  getTreenipaiva(id:number): void { 
+        this.treenipaivaService.getTreenipaiva(id)
         .then(treenipaiva => {
             this.treenipaiva = treenipaiva;
             console.log("Luettiin treenipäivä: "+ treenipaiva);

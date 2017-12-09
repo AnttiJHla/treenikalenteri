@@ -11,8 +11,9 @@ const routes: Routes = [
   { path: '', redirectTo: '/treenipaivat', pathMatch: 'full' },
   { path: 'kayttaja',  component: UserDetailComponent },
   { path: 'treenipaivat',  component: TreenipaivatComponent },
-  { path: 'treenipaivat/new', component: CreateTreenipaivaComponent },
-  { path: 'treenipaivat/new/:date', component: CreateTreenipaivaComponent },
+  //{ path: 'treenipaivat/new', component: CreateTreenipaivaComponent },
+  //{ path: 'treenipaivat/new/:date', component: CreateTreenipaivaComponent },
+  { path: 'treenipaivat/:id/:date', component: TreenipaivaComponent },
   { path: 'treenipaivat/:id', component: TreenipaivaComponent },
   { path: 'treenikk',  component: TreeniKkComponent },
 
