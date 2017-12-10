@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Treenipaiva } from '../treenipaiva';
-import { TreenipaivaService } from '../treenipaiva.service';
+import { TreenikalenteriService } from '../treenikalenteri.service';
 import { Router }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import 'rxjs/add/operator/switchMap';
@@ -14,19 +14,14 @@ import { Treeni } from '../treeni';
 
 })
 export class TreenipaivaComponent implements OnInit  {
-    //treenipaiva: Treenipaiva = null;
+    treeniTemplate : Treeni;    
     treenipaiva = <Treenipaiva> {
       pvm : "2017-11-30",
       treenit : [],
     };
 
-
-    treeniTemplate : Treeni;
-    
-    //treeniTemplate : Treeni;
-
     constructor(
-        private treenipaivaService: TreenipaivaService, 
+        private treenikalenteriService: TreenikalenteriService, 
         private route: ActivatedRoute,
         private router: Router,
         private location: Location,
@@ -34,19 +29,10 @@ export class TreenipaivaComponent implements OnInit  {
             this.treeniTemplate=<Treeni>{}
         }
 
-    // old_ngOnInit(): void {
-    //     this.route.paramMap
-    //     .switchMap((params: ParamMap) => this.treenipaivaService.getTreenipaiva(+params.get('id')))
-    //     .subscribe(treenipaiva => this.treenipaiva = treenipaiva);
-    // }  
     ngOnInit(): void {
-        this.route.paramMap
-        .subscribe(
-            (params: ParamMap) => this.doStuff(params.get('id'),params.get('date'))
-        );        
-    }  
+        var id : string = this.route.snapshot.params['id'];
+        var date : string = this.route.snapshot.params['date'];
 
-    doStuff(id : string, date : string):void {
         console.log("ID-kenttä:" + id);
         if (id==="new") {
             console.log("Luodaan uusi treenipäivä.");
@@ -65,7 +51,7 @@ export class TreenipaivaComponent implements OnInit  {
     }  
     deleteTreenipaiva(): void {
         console.log("Poistetaan treenipaiva: " + this.treenipaiva.id);
-        this.treenipaivaService.deleteTreenipaiva(this.treenipaiva.id)
+        this.treenikalenteriService.deleteTreenipaiva(this.treenipaiva.id)
         .then(response => {
             console.log("Poistettiin treenipäivä");
             console.log("Navigoidaan takaisin sivulle: /treenipaivat/");
@@ -78,7 +64,7 @@ export class TreenipaivaComponent implements OnInit  {
         console.log("Poistetaan treeni: " + id + " index: " + index);
         this.treenipaiva.treenit.splice(index,1);
         console.log("Treenit: " + JSON.stringify(this.treenipaiva.treenit));
-        this.treenipaivaService.deleteTreeni(id)
+        this.treenikalenteriService.deleteTreeni(id)
         .then(response => {
             console.log("Poistettiin treeni");
         });
@@ -86,10 +72,10 @@ export class TreenipaivaComponent implements OnInit  {
     save(): void {
         console.log("Tallennetaan treenipaiva: " + JSON.stringify(this.treenipaiva));        
         if (this.treenipaiva.id ) {
-          this.treenipaivaService.updateTreenipaiva(<Treenipaiva> this.treenipaiva)
+          this.treenikalenteriService.updateTreenipaiva(<Treenipaiva> this.treenipaiva)
             .then((treenipaiva) => this.treenipaiva = <any> treenipaiva);
         } else {
-          this.treenipaivaService.createTreenipaiva(<Treenipaiva> this.treenipaiva)
+          this.treenikalenteriService.createTreenipaiva(<Treenipaiva> this.treenipaiva)
             .then((treenipaiva) => this.treenipaiva = <any> treenipaiva);
         }
     }  
@@ -100,7 +86,7 @@ export class TreenipaivaComponent implements OnInit  {
   
   
   getTreenipaiva(id:number): void { 
-        this.treenipaivaService.getTreenipaiva(id)
+        this.treenikalenteriService.getTreenipaiva(id)
         .then(treenipaiva => {
             this.treenipaiva = treenipaiva;
             console.log("Luettiin treenipäivä: "+ treenipaiva);

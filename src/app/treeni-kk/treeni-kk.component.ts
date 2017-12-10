@@ -2,8 +2,7 @@
 import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
 
 import { Treenipaiva } from '../treenipaiva';
-import { LoginService } from '../login.service';
-import { TreenipaivaService } from '../treenipaiva.service';
+import { TreenikalenteriService } from '../treenikalenteri.service';
 import { OnInit } from '@angular/core';
 import { Router }   from '@angular/router';
 import { TreenipaivaPvm } from "../treenipaiva-pvm";
@@ -26,8 +25,7 @@ export class TreeniKkComponent implements OnInit, OnChanges  {
   }
 
   constructor(
-      private treenipaivaService: TreenipaivaService, 
-      private loginService: LoginService, 
+      private treenikalenteriService: TreenikalenteriService, 
       private router: Router
     ) {
           
@@ -86,9 +84,9 @@ export class TreeniKkComponent implements OnInit, OnChanges  {
   }
   
   getTreenipaivat(): void { 
-      if (this.loginService.userHasLoggedIn()) {
-          var token = this.loginService.getToken();
-          this.treenipaivaService.getTreenipaivat(token)
+      if (this.treenikalenteriService.userHasLoggedIn()) {
+          var token = this.treenikalenteriService.getToken();
+          this.treenikalenteriService.getTreenipaivat(token)
           .then(treenipaivat => {
               this.treenipaivat = treenipaivat;
               this.treenipaiva = treenipaivat[0]; // Only for development
@@ -102,7 +100,7 @@ export class TreeniKkComponent implements OnInit, OnChanges  {
 
   addTreenipaiva(): void {
       console.log("Lisätään päivä");
-      this.treenipaivaService.createTreenipaiva(<Treenipaiva> this.treenipaivaTemplate )
+      this.treenikalenteriService.createTreenipaiva(<Treenipaiva> this.treenipaivaTemplate )
         .then(treenipaiva => {
             this.treenipaivat.push(treenipaiva);
             console.log("Luotiin uusi treenipäivä: "+ treenipaiva.id);

@@ -1,28 +1,26 @@
 import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
 import { Treenipaiva } from './treenipaiva';
-import { LoginService } from './login.service';
-import { TreenipaivaService } from './treenipaiva.service';
+import { TreenikalenteriService } from './treenikalenteri.service';
 import { OnInit } from '@angular/core';
 import { Router }   from '@angular/router';
 
 
 @Component({
-  selector: 'treenipaivat',
+//  selector: 'treenipaivat',
   templateUrl: './treenipaivat.component.html',
   styleUrls: [ './treenipaivat.component.css' ],
 
 })
 export class TreenipaivatComponent implements OnInit, OnChanges  {
   treenipaivat: Treenipaiva[];
-  @Input() userLoggedIn: boolean;
+  @Input() userlogin: boolean;
   treenipaivaTemplate: Treenipaiva = <Treenipaiva> {
     pvm : "2017-11-30",
     treenit : [],
   }
 
   constructor(
-      private treenipaivaService: TreenipaivaService, 
-      private loginService: LoginService, 
+      private treenikalenteriService: TreenikalenteriService, 
       private router: Router
     ) { }
 
@@ -38,12 +36,25 @@ export class TreenipaivatComponent implements OnInit, OnChanges  {
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
     let log: string[] = [];
     console.log(`User trying to log in`);
+
+    for (let propName in changes) {
+      let changedProp = changes[propName];
+      let to = JSON.stringify(changedProp.currentValue);
+      if (changedProp.isFirstChange()) {
+        console.log(`Initial value of ${propName} set to ${to}`);
+      } else {
+        let from = JSON.stringify(changedProp.previousValue);
+        console.log(`${propName} changed from ${from} to ${to}`);
+      }
     }
+  }
+
+
   
   getTreenipaivat(): void { 
-      if (this.loginService.userHasLoggedIn()) {
-          var token = this.loginService.getToken();
-          this.treenipaivaService.getTreenipaivat(token)
+      if (this.treenikalenteriService.userHasLoggedIn()) {
+          var token = this.treenikalenteriService.getToken();
+          this.treenikalenteriService.getTreenipaivat(token)
           .then(treenipaivat => {
               this.treenipaivat = treenipaivat;
             });

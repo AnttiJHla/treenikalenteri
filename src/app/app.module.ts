@@ -11,8 +11,7 @@ import { AppComponent }             from './app.component';
 import { UserDetailComponent }      from './user-detail.component';
 import { TreenipaivatComponent }    from './treenipaivat.component';
 import { TreenipaivaComponent }     from './treenipaiva/treenipaiva.component';
-import { LoginService }             from './login.service';
-import { TreenipaivaService }       from './treenipaiva.service';
+import { TreenikalenteriService }             from './treenikalenteri.service';
 import { TreeniKkComponent } from './treeni-kk/treeni-kk.component';
 
 @NgModule({
@@ -30,8 +29,7 @@ import { TreeniKkComponent } from './treeni-kk/treeni-kk.component';
     TreeniKkComponent,
   ],
   providers: [ 
-    LoginService,
-    TreenipaivaService
+    TreenikalenteriService
    ],
   bootstrap: [ AppComponent ],
 

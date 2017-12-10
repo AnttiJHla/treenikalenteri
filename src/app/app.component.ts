@@ -1,10 +1,9 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Router }                 from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Location }                 from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 
-import { LoginService } from './login.service';
+import { TreenikalenteriService } from './treenikalenteri.service';
 
 import { User } from './user';
 import { Treenipaiva } from './treenipaiva';
@@ -18,6 +17,8 @@ import { Treenipaiva } from './treenipaiva';
 export class AppComponent  implements OnInit {
     title = 'app';
     userLoggedIn : boolean = false;
+    @Output() userlogin: EventEmitter<any> = new EventEmitter();
+
     private headers = new Headers({'Content-Type': 'application/json'});    
   
     password : string = "password1234";
@@ -27,20 +28,23 @@ export class AppComponent  implements OnInit {
     constructor(
       private route: ActivatedRoute,
       private location: Location,
-      private loginService: LoginService,
+      private treenikalenteriService: TreenikalenteriService,
       private router: Router,
     ) {}
 
     ngOnInit(): void {
       this.login();
     }
+    
+    
 
     login(): void {
-        this.loginService.login(this.email, this.password)
+        this.treenikalenteriService.login(this.email, this.password)
             .then(loginResponse => {
                 console.log("User logged in :");
                 this.userLoggedIn=true;
                 this.loginStatus = "Kirjautunut";
+                this.userlogin.emit(true);
             })
     }    
 }

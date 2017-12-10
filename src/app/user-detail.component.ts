@@ -4,7 +4,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location }                 from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 
-import { LoginService, LoginResponse } from './login.service';
+import { TreenikalenteriService, LoginResponse } from './treenikalenteri.service';
 
 import { User } from './user';
 
@@ -27,7 +27,7 @@ export class UserDetailComponent  implements OnInit {
     constructor(
       private route: ActivatedRoute,
       private location: Location,
-      private loginService: LoginService,
+      private treenikalenteriService: TreenikalenteriService,
     ) {}
 
     ngOnInit(): void {
@@ -38,22 +38,22 @@ export class UserDetailComponent  implements OnInit {
        //this.location.back();
     }
     save(): void {
-        this.loginService.updateUserDetails(this.user)
+        this.treenikalenteriService.updateUserDetails(this.user)
              .then(() => this.goBack());
     }    
     login(): void {
-        this.loginService.login(this.email, this.password)
+        this.treenikalenteriService.login(this.email, this.password)
             .then(loginResponse => this.token = loginResponse)
             
     }    
     getUserDetails(): void {
-        this.loginService.getUserDetails()
+        this.treenikalenteriService.getUserDetails()
             .then(loginResponse => this.user = loginResponse)
             
     }    
     getToken(): void {
-        this.myToken = this.loginService.getToken();
-        console.log("My token: " + this.loginService.getToken());
+        this.myToken = this.treenikalenteriService.getToken();
+        console.log("My token: " + this.treenikalenteriService.getToken());
     }    
 
 
