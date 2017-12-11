@@ -45,6 +45,8 @@ export class AppComponent  implements OnInit {
                 this.userLoggedIn=true;
                 this.loginStatus = "Kirjautunut";
                 this.userlogin.emit(true);
+                this.router.navigate(['treenipaivat']);
+
             })
     }    
 }

@@ -16,7 +16,8 @@ export class TreeniKkComponent implements OnInit, OnChanges  {
   treenipaivat: Treenipaiva[];
   treenipaiva:  Treenipaiva; // Only for development purposes
   viikonpaivat : string[] = ["Ma","Ti","Ke","To","Pe","La","Su"];
-  viikkonumerot: number[] =[1,2,3,4];
+  viikkojenLkm : number = 12;
+  viikkonumerot: number[] = [];
   treenipaivalista : TreenipaivaPvm[] = [];
   @Input() userLoggedIn: boolean;
   treenipaivaTemplate: Treenipaiva = <Treenipaiva> {
@@ -33,8 +34,16 @@ export class TreeniKkComponent implements OnInit, OnChanges  {
 
   ngOnInit(): void {
     this.getTreenipaivat();
+    this.alustaViikkonumerot();
   }  
 
+  alustaViikkonumerot(): void {
+    this.viikkonumerot=[];
+    for (let i=1;i<=this.viikkojenLkm;i++) {
+      this.viikkonumerot.push(i);
+    }
+
+  }
   gotoDetail(id: number): void {
     let link = ['treenipaivat/', id];
     this.router.navigate(link);
@@ -52,11 +61,13 @@ export class TreeniKkComponent implements OnInit, OnChanges  {
 
   alustaTreenipaivalista(): void { 
     console.log("alustetaan treenipäivälista");
+    this.alustaViikkonumerot();
     var date1 = new Date();
     var weekday = date1.getUTCDay(); // Should contain this weeks day number
+    var paivienLkm=7*this.viikkojenLkm;
     // Tulosta 4x7 päivämäärää alkaen 3 vkoa sitten
-    for (var i=1; i<=28; i++) {
-      var tmp = new Date(+ date1 + (i-weekday+7-28)*1000*24*60*60);
+    for (var i=1; i<=paivienLkm; i++) {
+      var tmp = new Date(+ date1 + (i-weekday+7-paivienLkm)*1000*24*60*60);
       console.log("Pvm: " + tmp.toISOString().split("T")[0]);
       var tp = new TreenipaivaPvm();
       tp.pvm=tmp.toISOString().split("T")[0];

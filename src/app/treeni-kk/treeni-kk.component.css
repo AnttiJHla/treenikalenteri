@@ -1,6 +1,10 @@
 .container {
     min-width: 1200px;
 }
+
+a {
+    cursor: pointer;
+}
 .my-header {
     width: 150px;
     display: inline-block;
