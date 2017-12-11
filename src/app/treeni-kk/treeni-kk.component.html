@@ -1,6 +1,17 @@
 <div class="container">
-  <h2>Kuukausinäkymä</h2>
+  <!--h2>Kuukausinäkymä</h2-->
   <div>Viikkojen lukumäärä: {{viikkojenLkm}}</div>
+  <button (click)="asetaTreeniviikot(4)"> 4 </button>
+  <button (click)="asetaTreeniviikot(8)"> 8 </button>
+  <button (click)="asetaTreeniviikot(12)"> 12 </button>
+  <button (click)="asetaTreeniviikot(52)"> 52 </button>
+  <div>Viikko Offset: {{viikkoOffset}}</div>
+  <button (click)="asetaViikkoOffset(-4)"> -4 </button>
+  <button (click)="asetaViikkoOffset(-1)"> -1 </button>
+  <button (click)="asetaViikkoOffset( 0)">  0 </button>
+  <button (click)="asetaViikkoOffset( 1)"> +1 </button>
+  <button (click)="asetaViikkoOffset( 4)"> +4 </button>
+
 
   <div class="kuukausinakyma">
     <div class="vko-column">
