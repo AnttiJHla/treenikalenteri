@@ -5,21 +5,51 @@ import { UserDetailComponent }   from './user-detail.component';
 import { TreenipaivatComponent }      from './treenipaivat.component';
 import { TreenipaivaComponent }      from './treenipaiva/treenipaiva.component';
 import { TreeniKkComponent }      from './treeni-kk/treeni-kk.component';
+import { WelcomeComponent }      from './welcome/welcome.component';
 
+import { TreenikalenteriResolver } from './treenikalenteri-resolver.service';
+import { TreenipaivaResolver } from './treenipaiva-resolver.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/treenipaivat', pathMatch: 'full' },
-  { path: 'kayttaja',  component: UserDetailComponent },
-  { path: 'treenipaivat',  component: TreenipaivatComponent },
-  { path: 'treenipaivat/:id/:date', component: TreenipaivaComponent },
-  { path: 'treenipaivat/:id', component: TreenipaivaComponent },
-  { path: 'treenikk',  component: TreeniKkComponent },
-
-  { path: 'rekisteroityminen',  component: UserDetailComponent },
+  { 
+    path: '', 
+    redirectTo: '/welcome', 
+    pathMatch: 'full' 
+  },
+  { 
+    path: 'welcome',  
+    component: WelcomeComponent
+  },
+  { 
+    path: 'treenipaivat',  
+    component: TreenipaivatComponent,
+    resolve : { treenipaivat : TreenikalenteriResolver }
+  },
+  { path: 'treenikk', 
+    component: TreeniKkComponent,
+    resolve : { treenipaivat : TreenikalenteriResolver }
+  },
+  { path: 'treenipaivat/:id/:date', 
+    component: TreenipaivaComponent,
+    resolve: { treenipaiva : TreenipaivaResolver}
+  },
+  { 
+    path: 'treenipaivat/:id', 
+    component: TreenipaivaComponent,
+    resolve: { treenipaiva : TreenipaivaResolver}
+   },
+   { path: 'kayttaja',  
+   component: UserDetailComponent
+ },
+ { 
+    path: 'rekisteroityminen',  
+    component: UserDetailComponent 
+  },
 ];
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  exports: [ RouterModule ],
+  providers: []
 })
 export class AppRoutingModule {}

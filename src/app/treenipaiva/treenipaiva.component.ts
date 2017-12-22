@@ -29,22 +29,22 @@ export class TreenipaivaComponent implements OnInit  {
             this.treeniTemplate=<Treeni>{}
         }
 
-    ngOnInit(): void {
-        var id : string = this.route.snapshot.params['id'];
-        var date : string = this.route.snapshot.params['date'];
-
-        console.log("ID-kenttä:" + id);
-        if (id==="new") {
-            console.log("Luodaan uusi treenipäivä.");
-            console.log("jolla treenipäivä:" + date);
-            this.treenipaiva.pvm=date;
-        } else {
-            console.log("Luetaan treenipäivän tiedot palvelusta.");
-            this.getTreenipaiva(+id);
+        ngOnInit(): void {
+            this.route.data.subscribe(data => {
+                this.onProductRetrieved(data['treenipaiva']);
+            });
         }
-    }
-
-
+        onProductRetrieved(treenipaiva: Treenipaiva): void {
+            this.treenipaiva = treenipaiva;
+    
+            // if (this.treenipaiva.id === 0) {
+            //     this.pageTitle = 'Add Product';
+            // } else {
+            //     this.pageTitle = `Edit Product: ${this.treenipaiva.treenipaivaName}`;
+            // }
+        }
+            
+            
     addTreeni(): void {
         console.log("Lisätään treeni");
         this.treenipaiva.treenit.push(<Treeni>this.treeniTemplate);
@@ -85,12 +85,12 @@ export class TreenipaivaComponent implements OnInit  {
     }
   
   
-  getTreenipaiva(id:number): void { 
-        this.treenikalenteriService.getTreenipaiva(id)
-        .then(treenipaiva => {
-            this.treenipaiva = treenipaiva;
-            console.log("Luettiin treenipäivä: "+ treenipaiva);
-        });
-  }
+//   getTreenipaiva(id:number): void { 
+//         this.treenikalenteriService.getTreenipaiva(id)
+//         .then(treenipaiva => {
+//             this.treenipaiva = treenipaiva;
+//             console.log("Luettiin treenipäivä: "+ treenipaiva);
+//         });
+//   }
     
 }

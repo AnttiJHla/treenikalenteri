@@ -1,11 +1,6 @@
-<div class="container" *ngIf="treenikalenteriService.loggedIn">
-<h2>Treenipäivälista</h2>
-<button (click)="getTreenipaivat()">
-    <i class="glyphicon glyphicon-refresh"></i>
-    Päivitä
-</button>
+<div class="container" >
+        <h2>Treenipäivälista</h2>
 
-</div>
 <div *ngIf="treenipaivat" class="container">
 <table class="table table-hover table table-striped">
     <thead>

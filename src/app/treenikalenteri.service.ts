@@ -1,8 +1,14 @@
 import { Injectable }    from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, Response } from '@angular/http';
 import { Subject }    from 'rxjs/Subject';
 
 import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/of';
 
 import { Treenipaiva } from './treenipaiva';
 import { User } from './user';
@@ -21,7 +27,7 @@ export class TreenikalenteriService {
     private userUrl = 'http://127.0.0.1:8000/tk/user/';  // URL to web api
     private headers = new Headers({'Content-Type': 'application/json'});    
     private token : string = "";
-    private loggedIn : boolean = false;
+    public loggedIn : boolean = false;
     
 
     // Observable string sources
@@ -29,12 +35,7 @@ export class TreenikalenteriService {
 
     // Observable string streams
     userLoggedIn$ = this.userLoggedInSource.asObservable();
-    
-    // Service message commands
-    announceLoginStatus(loginStatus: boolean) {
-        this.userLoggedInSource.next(loginStatus);
-    }
-    
+        
     constructor(
         private http: Http
    ) { }
@@ -65,8 +66,8 @@ export class TreenikalenteriService {
             .then(res => {
                 this.token = res.json().token;
                 this.loggedIn=true;
-            }
-            )            
+                this.userLoggedInSource.next(true);
+            })            
             .catch(this.handleError);
     }
     getUserDetails(): Promise<User> {
@@ -95,31 +96,48 @@ export class TreenikalenteriService {
     userHasLoggedIn(): boolean {
         return this.loggedIn;
     }                    
-        
-    
-    getTreenipaivat(token : string): Promise<Treenipaiva[]> {
+
+    getTreenipaivat(): Observable<Treenipaiva[]> {
         console.log("Trying to get treenipaivat"); 
-        if (this.userHasLoggedIn()) {
-            return this.http.get(this.tkUrl + "treenipaivat/", this.getHeaders())
-                .toPromise()
-                .then(response => response.json().results as Treenipaiva[])
-                .catch(this.handleError);
-        } else {
-            return null;
-        }
+        const url = `${this.tkUrl}treenipaivat/`;
+
+        return this.http.get(url, this.getHeaders())
+        .map(this.extractTreenipaivat)
+        .catch(this.handleError);
     }
-    getTreenipaiva(id : number): Promise<Treenipaiva> {
+
+    getTreenipaiva(id : number): Observable <Treenipaiva> {
+        if (id === 0) {
+            return Observable.of(this.initializeTreenipaiva());
+        };
+        const url = `${this.tkUrl}treenipaivat/${id}`;
+        const headers = this.getHeaders();
+
+        return this.http.get(url, headers)
+        .map(this.extractTreenipaiva)
+        .catch(this.handleError);
+    }
+    
+    private extractTreenipaivat(response: Response) : Treenipaiva []  {
+        return <Treenipaiva []> response.json().results;
+    }
+
+    private extractTreenipaiva(response: Response) : Treenipaiva  {
+        return <Treenipaiva> response.json();
+    }
+
+    old_getTreenipaiva(id : number): Promise<Treenipaiva> {
         console.log("Trying to get treenipaiva -- " + id); 
-        if (this.userHasLoggedIn()) {
-            return this.http.get(this.tkUrl + "treenipaivat/"+id+"/", this.getHeaders())
-                    .toPromise()
-                    .then(response => response.json() as Treenipaiva)
-                    .catch(this.handleError);
-        } else {
-            return null;
-        }
+    if (this.userHasLoggedIn()) {
+        return this.http.get(this.tkUrl + "treenipaivat/"+id+"/", this.getHeaders())
+                .toPromise()
+                .then(response => response.json() as Treenipaiva)
+                .catch(this.handleError);
+    } else {
+        return null;
     }
-    updateTreenipaiva(treenipaiva:Treenipaiva): Promise<Treenipaiva> {
+}
+updateTreenipaiva(treenipaiva:Treenipaiva): Promise<Treenipaiva> {
         var headers = this.getHeaders();
         return this.http
             .put(this.tkUrl + "treenipaivat/"+treenipaiva["id"]+"/", treenipaiva, headers)
@@ -152,5 +170,10 @@ export class TreenikalenteriService {
             .catch(this.handleError);
     }
 
+    initializeTreenipaiva(): Treenipaiva {
+        // Return an initialized object
+         return <Treenipaiva> {}
+        
+    }
 
 }

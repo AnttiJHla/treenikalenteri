@@ -4,7 +4,7 @@ import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
 import { Treenipaiva } from '../treenipaiva';
 import { TreenikalenteriService } from '../treenikalenteri.service';
 import { OnInit } from '@angular/core';
-import { Router }   from '@angular/router';
+import { Router, ActivatedRoute }   from '@angular/router';
 import { TreenipaivaPvm } from "../treenipaiva-pvm";
 
 @Component({
@@ -30,14 +30,15 @@ export class TreeniKkComponent implements OnInit, OnChanges  {
 
   constructor(
       private treenikalenteriService: TreenikalenteriService, 
+      private route: ActivatedRoute,
       private router: Router
     ) {
-          
-     }
+      //this.treenipaivat = null;
+    }
 
   ngOnInit(): void {
-    this.getTreenipaivat();
-    this.alustaViikkonumerot();
+    this.treenipaivat = this.route.snapshot.data['treenipaivat'];
+    this.asetaTreeniviikot(4);
   }  
 
   alustaViikkonumerot(): void {
@@ -139,21 +140,6 @@ export class TreeniKkComponent implements OnInit, OnChanges  {
     return tp;
   }
   
-  getTreenipaivat(): void { 
-      if (this.treenikalenteriService.userHasLoggedIn()) {
-          var token = this.treenikalenteriService.getToken();
-          this.treenikalenteriService.getTreenipaivat(token)
-          .then(treenipaivat => {
-              this.treenipaivat = treenipaivat;
-              this.treenipaiva = treenipaivat[0]; // Only for development
-              console.log("Treenipäivät haettu (KK-näkymä)");
-              this.alustaTreenipaivalista();
-            });
-      } else {
-          this.treenipaivat=[];
-      }
-  }
-
   addTreenipaiva(): void {
       console.log("Lisätään päivä");
       this.treenikalenteriService.createTreenipaiva(<Treenipaiva> this.treenipaivaTemplate )

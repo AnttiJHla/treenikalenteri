@@ -33,7 +33,7 @@
               <a  *ngIf="tp.treenipaiva" routerLink="/treenipaivat/{{tp.treenipaiva?.id}}" routerLinkActive="active">
                 {{tp.pvm}}
               </a>
-              <a  *ngIf="!tp.treenipaiva" routerLink="/treenipaivat/new/{{tp.pvm}}" routerLinkActive="active">
+              <a  *ngIf="!tp.treenipaiva" routerLink="/treenipaivat/0/{{tp.pvm}}" routerLinkActive="active">
                 {{tp.pvm}}
               </a>
             </div>
