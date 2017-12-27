@@ -126,18 +126,7 @@ export class TreenikalenteriService {
         return <Treenipaiva> response.json();
     }
 
-    old_getTreenipaiva(id : number): Promise<Treenipaiva> {
-        console.log("Trying to get treenipaiva -- " + id); 
-    if (this.userHasLoggedIn()) {
-        return this.http.get(this.tkUrl + "treenipaivat/"+id+"/", this.getHeaders())
-                .toPromise()
-                .then(response => response.json() as Treenipaiva)
-                .catch(this.handleError);
-    } else {
-        return null;
-    }
-}
-updateTreenipaiva(treenipaiva:Treenipaiva): Promise<Treenipaiva> {
+    updateTreenipaiva(treenipaiva:Treenipaiva): Promise<Treenipaiva> {
         var headers = this.getHeaders();
         return this.http
             .put(this.tkUrl + "treenipaivat/"+treenipaiva["id"]+"/", treenipaiva, headers)
@@ -172,7 +161,7 @@ updateTreenipaiva(treenipaiva:Treenipaiva): Promise<Treenipaiva> {
 
     initializeTreenipaiva(): Treenipaiva {
         // Return an initialized object
-         return <Treenipaiva> {}
+         return <Treenipaiva> {"treenit":[]}
         
     }
 

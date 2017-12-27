@@ -83,14 +83,5 @@ export class TreenipaivaComponent implements OnInit  {
     goBack(): void {
                  
     }
-  
-  
-//   getTreenipaiva(id:number): void { 
-//         this.treenikalenteriService.getTreenipaiva(id)
-//         .then(treenipaiva => {
-//             this.treenipaiva = treenipaiva;
-//             console.log("Luettiin treenipäivä: "+ treenipaiva);
-//         });
-//   }
     
 }
