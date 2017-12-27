@@ -13,23 +13,15 @@ import { User } from '../user';
   styleUrls: ['./logout.component.css']
 })
 export class LogoutComponent implements OnInit {
-  user : User;
 
   constructor(
-    private route: ActivatedRoute,
-    private location: Location,
     private treenikalenteriService: TreenikalenteriService,
   ) {}
 
     ngOnInit(): void {
-      this.getUserDetails();
     }
 
-    getUserDetails(): void {
-        this.treenikalenteriService.getUserDetails()
-            .then(loginResponse => this.user = loginResponse)
-            
-    }    
+  
 
 }
 

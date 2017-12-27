@@ -1,55 +1,37 @@
-  <nav class="navbar navbar-inverse" *ngIf="!userLoggedIn">
-      <div class="container-fluid">
-    
+<nav class="navbar navbar-inverse" *ngIf="!userLoggedIn">
+  <div class="container-fluid">
+  
       <div class="navbar-header">
-          <a class="navbar-brand" href="#">Treenikalenteri</a>
-        </div>        
-      <a class="navbar-brand" routerLink="/rekisteroityminen" routerLinkActive="active">Rekisteröityminen</a>
+          <div class="nav navbar-nav">  
+              Treenikalenteri
+          </div>
+      </div>        
 
-    <ul class="nav navbar-nav navbar-right">
-      <input  [(ngModel)]="email" title="Email address"  placeholder="email" />
-      <input  [(ngModel)]="password" type="password"  title="Password" placeholder="password" />
-      <button (click)="login()" title="Login" class="btn btn-xs"><i class="glyphicon glyphicon-ok"></i></button>
-    </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <a class="navbar-brand" routerLink="/rekisteroityminen" routerLinkActive="active"> <span class="glyphicon glyphicon-user"></span> Rekisteröityminen</a>
+          <input  [(ngModel)]="email" title="Email address"  placeholder="email" />
+          <input  [(ngModel)]="password" type="password"  title="Password" placeholder="password" />
+          <button (click)="login()" title="Login" class="btn btn-xs"><i class="glyphicon glyphicon-ok"></i></button>
+      </ul>
   </div>        
 </nav>
-  <nav class="navbar navbar-inverse" *ngIf="userLoggedIn">
-    <div class="container-fluid">
-      <ul class="nav navbar-nav">
-    
-      <li class="active">
-          <a class="navbar-brand" routerLink="/treenipaivat" routerLinkActive="active">Treenipäivälista</a>      
-      </li>
-      <li class="active">
-          <a class="navbar-brand" routerLink="/treenipaivat/0" routerLinkActive="active">Uusi treenipäivä</a>      
-      </li>
-      <li class="active">
-          <a class="navbar-brand" routerLink="/treenikk" routerLinkActive="active">Kuukausinäkymä</a>      
-      </li>
-      <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">User <span class="caret"></span></a>
-
-          <ul class="dropdown-menu">
-            <li><a href="#">Page 1-1</a></li>
-            <li><a href="#">Page 1-2</a></li>
-            <li><a href="#">Page 1-3</a></li>
-          </ul>
-      </li>
-        <!--ul class="dropdown-menu">
-              <li>
-                  <a routerLink="/kayttaja" title="Käyttäjän tiedot" routerLinkActive="active">Käyttäjän tiedot</a>
-              </li>     
-              <li>
-                  <a routerLink="/logout" title="Kirjaudu ulos" routerLinkActive="active">Kirjaudu ulos</a>
-              </li>      
-        </ul-->
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
+<nav class="navbar navbar-inverse" *ngIf="userLoggedIn">
+  <div class="container-fluid">
+        <div class="navbar-header">
+            <div class="nav navbar-nav">  
+                Treenikalenteri
+            </div>
+        </div>        
+        <div class="nav navbar-nav">  
+            <a class="navbar-brand" routerLink="/treenipaivat" routerLinkActive="active">Treenipäivälista</a>      
+            <a class="navbar-brand" routerLink="/treenipaivat/0" routerLinkActive="active">Uusi treenipäivä</a>      
+            <a class="navbar-brand" routerLink="/treenikk" routerLinkActive="active">Kuukausinäkymä</a>      
+      </div>
+      <ul class="nav navbar-nav navbar-right">
         <li><a routerLink="/kayttaja" routerLinkActive="active"> <span class="glyphicon glyphicon-user"></span> User Info</a></li>
-        <li><a routerLink="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        <li><a (click)="logOut()" routerLink="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       </ul>
-      
-    </div>
-  </nav>
+  </div>      
+ </nav>
 
   <router-outlet></router-outlet>    

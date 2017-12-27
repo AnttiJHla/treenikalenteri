@@ -51,6 +51,7 @@ export class AppComponent  implements OnInit {
   }
   logout(): void {
     this.treenikalenteriService.logout();
+    this.userLoggedIn=false;
   }    
 }
 
