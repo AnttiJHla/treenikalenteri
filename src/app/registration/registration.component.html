@@ -1,0 +1,39 @@
+<div >
+  <h2>{{username}} details!</h2>
+  <div>
+      <div>
+        <label>Username: </label>
+        <input [(ngModel)]="username" placeholder="username" />
+    </div>
+      <div>
+        <label>Firstname: </label>
+        <input [(ngModel)]="firstname" placeholder="firstname" />
+    </div>
+      <div>
+        <label>Lastname: </label>
+        <input [(ngModel)]="lastname" placeholder="lastname" />
+    </div>
+    <div>
+      <label>Organisation: </label>
+      <input [(ngModel)]="organization" placeholder="organization" />
+  </div>
+  <div>
+    <label>Phone: </label>
+    <input [(ngModel)]="phone" placeholder="phone" />
+</div>
+<div>
+    <label>Email: </label>
+    <input [(ngModel)]="email" placeholder="email" />
+</div>
+<div>
+    <label>Password: </label>
+    <input type="password" [(ngModel)]="password1" placeholder="password" />
+</div>
+<div>
+  <label>Confirm password: </label>
+  <input type="password" [(ngModel)]="password2" placeholder="password" />
+</div>
+<!--button (click)="goBack()">Back</button-->
+  <!--button (click)="getUserDetails()">Refresh</button-->
+  <button (click)="save()">Save</button>
+</div>

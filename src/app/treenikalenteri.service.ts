@@ -70,8 +70,38 @@ export class TreenikalenteriService {
             })            
             .catch(this.handleError);
     }
+    registration(
+        username    : string,
+        firstname   : string,
+        lastname    : string,
+        phone       : string,
+        organization: string,
+        email       : string, 
+        password    : string,
+    ): Promise<string> {
+        var headers = this.getHeaders();
+        
+        var details = {
+            username    : username,
+            firstname   : firstname,
+            lastname    : lastname,
+            phone       : phone,
+            organization: organization,
+            email       : email, 
+            password    : password,
+            }
+        return this.http
+            .post(this.tkUrl + "register", JSON.stringify(details), headers)
+            .toPromise()
+            .then(res => {
+                this.token = res.json().token;
+                this.loggedIn=true;
+                this.userLoggedInSource.next(true);
+            })            
+            .catch(this.handleError);
+    }
     getUserDetails(): Promise<User> {
-        var headers = this.getHeaders()
+        var headers = this.getHeaders();
         return this.http
             .get(this.userUrl,headers)
             .toPromise()
@@ -79,7 +109,7 @@ export class TreenikalenteriService {
             .catch(this.handleError);
     }
     updateUserDetails(user:User): Promise<User> {
-        var headers = this.getHeaders()
+        var headers = this.getHeaders();
         return this.http
             .put(this.userUrl, user, headers)
             .toPromise()

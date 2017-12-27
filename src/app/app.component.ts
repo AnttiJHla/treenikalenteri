@@ -33,21 +33,24 @@ export class AppComponent  implements OnInit {
     ) {}
 
     ngOnInit(): void {
-      this.login();
+      //this.login();
     }
     
     
 
-    login(): void {
-        this.treenikalenteriService.login(this.email, this.password)
-            .then(loginResponse => {
-                console.log("User logged in :");
-                this.userLoggedIn=true;
-                this.loginStatus = "Kirjautunut";
-                this.userlogin.emit(true);
-                this.router.navigate(['welcome']);
+  login(): void {
+    this.treenikalenteriService.login(this.email, this.password)
+        .then(loginResponse => {
+            console.log("User logged in :");
+            this.userLoggedIn=true;
+            this.loginStatus = "Kirjautunut";
+            this.userlogin.emit(true);
+            this.router.navigate(['welcome']);
 
-            })
-    }    
+        })
+  }
+  logout(): void {
+    this.treenikalenteriService.logout();
+  }    
 }
 

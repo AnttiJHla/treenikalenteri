@@ -6,6 +6,8 @@ import { TreenipaivatComponent }      from './treenipaivat.component';
 import { TreenipaivaComponent }      from './treenipaiva/treenipaiva.component';
 import { TreeniKkComponent }      from './treeni-kk/treeni-kk.component';
 import { WelcomeComponent }      from './welcome/welcome.component';
+import { LogoutComponent }      from './logout/logout.component';
+import { RegistrationComponent }      from './registration/registration.component';
 
 import { TreenikalenteriResolver } from './treenikalenteri-resolver.service';
 import { TreenipaivaResolver } from './treenipaiva-resolver.service';
@@ -43,8 +45,12 @@ const routes: Routes = [
  },
  { 
     path: 'rekisteroityminen',  
-    component: UserDetailComponent 
+    component: RegistrationComponent 
   },
+  { 
+     path: 'logout',  
+     component: LogoutComponent 
+   },
 ];
 
 @NgModule({

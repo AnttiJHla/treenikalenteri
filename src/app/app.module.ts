@@ -18,6 +18,8 @@ import { TreenipaivaResolver } from './treenipaiva-resolver.service';
 
 import { TreeniKkComponent } from './treeni-kk/treeni-kk.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   imports: [
@@ -33,6 +35,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
     TreenipaivaComponent,
     TreeniKkComponent,
     WelcomeComponent,
+    RegistrationComponent,
+    LogoutComponent,
   ],
   providers: [ 
     TreenikalenteriService,
