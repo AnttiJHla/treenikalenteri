@@ -1,8 +1,12 @@
 import { NgModule }      from '@angular/core';
 
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
+
+import { ToastModule, ToastsManager, ToastOptions } from 'ng2-toastr/ng2-toastr';
+
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -24,9 +28,11 @@ import { LogoutComponent } from './logout/logout.component';
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,    
     FormsModule,
     HttpModule,
     AppRoutingModule,
+    ToastModule.forRoot()
   ],
   declarations: [
     AppComponent,
@@ -41,7 +47,9 @@ import { LogoutComponent } from './logout/logout.component';
   providers: [ 
     TreenikalenteriService,
     TreenikalenteriResolver,
-    TreenipaivaResolver
+    TreenipaivaResolver,
+    ToastsManager,
+    ToastOptions
 
    ],
   bootstrap: [ AppComponent ],

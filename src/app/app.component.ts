@@ -1,4 +1,5 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewContainerRef,  } from '@angular/core';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Location }                 from '@angular/common';
 import 'rxjs/add/operator/switchMap';
@@ -17,20 +18,23 @@ import { Treenipaiva } from './treenipaiva';
 export class AppComponent  implements OnInit {
     title = 'app';
     userLoggedIn : boolean = false;
-    @Output() userlogin: EventEmitter<any> = new EventEmitter();
-
+    
     private headers = new Headers({'Content-Type': 'application/json'});    
   
     password : string = "password1234";
     email : string = "ana@live.com";   
-    loginStatus="";
+    loginStatus = "";
 
     constructor(
       private route: ActivatedRoute,
       private location: Location,
       private treenikalenteriService: TreenikalenteriService,
       private router: Router,
-    ) {}
+      private toastr: ToastsManager,
+      private _vcr : ViewContainerRef,
+    ) {
+      this.toastr.setRootViewContainerRef(_vcr);
+    }
 
     ngOnInit(): void {
       //this.login();
@@ -44,14 +48,24 @@ export class AppComponent  implements OnInit {
             console.log("User logged in :");
             this.userLoggedIn=true;
             this.loginStatus = "Kirjautunut";
-            this.userlogin.emit(true);
+            this.toastr.success('Kirjautuminen onnistui!');
             this.router.navigate(['welcome']);
 
-        })
+        }, error => {
+            this.toastr.error('Väärä käyttäjätunnus tai salasana? \n' + error);
+        })         
+        .catch(this.handleError);
   }
   logout(): void {
     this.treenikalenteriService.logout();
     this.userLoggedIn=false;
   }    
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred here:', error); 
+    return Promise.reject(error);
+    //return Promise.reject(error.message || error);
+  }
+
 }
 

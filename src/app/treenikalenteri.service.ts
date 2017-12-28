@@ -41,8 +41,9 @@ export class TreenikalenteriService {
    ) { }
 
     private handleError(error: any): Promise<any> {
-        console.error('An error occurred', error); // for demo purposes only
-        return Promise.reject(error.message || error);
+        console.error('Service: An error occurred ', error); 
+        //return Promise.reject(error.message || error);
+        return Promise.reject(error);
     }
 
     getHeaders(): any {
@@ -97,7 +98,11 @@ export class TreenikalenteriService {
                 this.token = res.json().token;
                 this.loggedIn=true;
                 this.userLoggedInSource.next(true);
-            })            
+            },
+                error => {
+                    throw(error)
+                }
+            )            
             .catch(this.handleError);
     }
     getUserDetails(): Promise<User> {

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Location }                 from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 
@@ -31,7 +32,10 @@ export class RegistrationComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private treenikalenteriService: TreenikalenteriService,
+    private toastr: ToastsManager,
+    private _vcr : ViewContainerRef,
   ) {
+    this.toastr.setRootViewContainerRef(_vcr);
   }
 
   ngOnInit() {
@@ -50,11 +54,21 @@ export class RegistrationComponent implements OnInit {
         this.email, 
         this.password1,
       )
-            .then(() => this.goBack());
+            .then(() => this.toastr.success('Rekisteröityminen onnistui! \n'),
+          (error) => {
+            this.toastr.error('Rekisteröityminen epäonnistui: \n' + error);
+
+          })         
+          .catch(this.handleError);
   }    
 
   goBack() {
 
+  }
+  private handleError(error: any): Promise<any> {
+    console.error('Registration: An error occurred', error); 
+    return Promise.reject(error);
+    //return Promise.reject(error.message || error);
   }
 
 
