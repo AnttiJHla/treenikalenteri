@@ -1,12 +1,12 @@
 <nav class="navbar navbar-inverse" *ngIf="!userLoggedIn">
   <div class="container-fluid">
   
-      <div class="navbar-header">
-          <div class="nav navbar-nav">  
-              Treenikalenteri
-          </div>
-      </div>        
-
+        <div class="navbar-header">
+                <a class="navbar-brand">  
+                    Treenikalenteri
+                </a>
+            </div>        
+    
       <ul class="nav navbar-nav navbar-right">
           <a class="navbar-brand" routerLink="/rekisteroityminen" routerLinkActive="active"> <span class="glyphicon glyphicon-user"></span> Rekisteröityminen</a>
           <input  [(ngModel)]="email" title="Email address"  placeholder="email" />
@@ -18,14 +18,14 @@
 <nav class="navbar navbar-inverse" *ngIf="userLoggedIn">
   <div class="container-fluid">
         <div class="navbar-header">
-            <div class="nav navbar-nav">  
+            <a class="navbar-brand">  
                 Treenikalenteri
-            </div>
+            </a>
         </div>        
         <div class="nav navbar-nav">  
-            <a class="navbar-brand" routerLink="/treenipaivat" routerLinkActive="active">Treenipäivälista</a>      
-            <a class="navbar-brand" routerLink="/treenipaivat/0" routerLinkActive="active">Uusi treenipäivä</a>      
-            <a class="navbar-brand" routerLink="/treenikk" routerLinkActive="active">Kuukausinäkymä</a>      
+                <a class="navbar-brand" routerLink="/treenipaivat/lista" routerLinkActive="active">Treenipäivälista</a>      
+                <a class="navbar-brand" routerLink="/treenipaivat/kalenteri" routerLinkActive="active">Kalenterinäkymä</a>      
+                <a class="navbar-brand" routerLink="/treenipaivat/0" routerLinkActive="active">Uusi treenipäivä</a>      
       </div>
       <ul class="nav navbar-nav navbar-right">
         <li><a routerLink="/kayttaja" routerLinkActive="active"> <span class="glyphicon glyphicon-user"></span> User Info</a></li>

@@ -23,11 +23,12 @@ const routes: Routes = [
     component: WelcomeComponent
   },
   { 
-    path: 'treenipaivat',  
+    path: 'treenipaivat/lista',  
     component: TreenipaivatComponent,
     resolve : { treenipaivat : TreenikalenteriResolver }
   },
-  { path: 'treenikk', 
+  {
+    path: 'treenipaivat/kalenteri', 
     component: TreeniKkComponent,
     resolve : { treenipaivat : TreenikalenteriResolver }
   },
