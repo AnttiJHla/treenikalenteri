@@ -21,7 +21,7 @@ export class TreenipaivaResolver implements Resolve<Treenipaiva> {
         return this.treenikalenteriService.getTreenipaiva(+id)
             .map(treenipaiva => {
                     let tp = treenipaiva;
-                    if (tp.pvm === "") {
+                    if (tp.pvm === undefined) {
                         tp.pvm = date;
                     }
                     return tp;
